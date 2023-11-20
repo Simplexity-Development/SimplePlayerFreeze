@@ -1,0 +1,12 @@
+# --------------------
+prefix: "<green><bold>[</bold><yellow>SPF</yellow><bold>]</bold></green> "
+no-permission: "<red>You do not have permission to run this command!</red>"
+no-player: "<red>You did not provide a valid player, please check your spelling and try again</red>"
+freeze-message: "<green><name></green> <aqua>has been frozen</aqua>"
+unfreeze-message: "<green><name></green> <yellow>has been unfrozen</yellow>"
+reload-message: "<gold>The Simple Player Freeze config has been reloaded</gold>"
+have-been-frozen: "<red><bold>[NOTICE]</bold></red> <gray>You have been frozen. You cannot move, interact, or chat"
+have-been-unfrozen: "<green><bold>[NOTICE]</bold></green> <gray>You have been unfrozen. You can move, interact, and chat again."
+cannot-chat: "You are frozen and cannot chat"
+login-message: "<red><bold>[NOTICE]</bold></red> <gray>You were frozen during a previous session. You cannot move, interact, or chat"
+login-notif: "<dark_gray><bold><name></bold></dark_gray> <gray>has logged in. They were frozen during a previous session."
