@@ -2,6 +2,17 @@ name: SimplePlayerFreeze
 version: '${project.version}'
 main: simplexity.simpleplayerfreeze.SimplePlayerFreeze
 api-version: '1.20'
+permissions:
+  spf.freeze:
+    description: 'allows a user to freeze another'
+  spf.unfreeze:
+    description: 'allows a user to unfreeze another'
+  spf.notify:
+    description: 'notifies this user when a frozen player logs in'
+  spf.bypass:
+    description: 'allows this user to bypass being frozen'
+  spf.reload:
+    description: 'allows this user to reload the config'
 commands:
   freeze:
     permission: 'spf.freeze'

@@ -6,6 +6,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
+import simplexity.simpleplayerfreeze.ConfigSettings;
 import simplexity.simpleplayerfreeze.Util;
 
 import java.util.List;
@@ -20,20 +21,22 @@ public class UnfreezePlayer extends Command {
     public boolean execute(@NotNull CommandSender sender, @NotNull String s, @NotNull String[] strings) {
         if (!sender.hasPermission(Util.unfreezePermission)) return false;
         if (strings.length == 0) {
-            sender.sendRichMessage(Util.noPlayer);
+            sender.sendRichMessage(ConfigSettings.prefix + ConfigSettings.noPlayer);
             return false;
         }
         Player player;
         player = Bukkit.getPlayer(strings[0]);
         if (player == null) {
-            sender.sendRichMessage(Util.noPlayer);
+            sender.sendRichMessage(ConfigSettings.prefix + ConfigSettings.noPlayer);
             return false;
-        } else {
-            Util.setUnfrozen(player);
-            sender.sendMessage(Util.miniMessage.deserialize(Util.unfreezeMessage,
-                    Placeholder.component("name", player.displayName())));
-            player.sendRichMessage(Util.haveBeenUnfrozen);
+        } else if (!Util.isFrozen(player)) {
+            sender.sendRichMessage(ConfigSettings.prefix + ConfigSettings.notFrozen);
+            return true;
         }
-        return false;
+        Util.setUnfrozen(player);
+        sender.sendMessage(Util.miniMessage.deserialize(ConfigSettings.unfreezeMessage,
+                Placeholder.component("name", player.displayName())));
+        player.sendRichMessage(ConfigSettings.haveBeenUnfrozen);
+        return true;
     }
 }
