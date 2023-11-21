@@ -8,6 +8,7 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import simplexity.simpleplayerfreeze.ConfigSettings;
 import simplexity.simpleplayerfreeze.Util;
+import simplexity.simpleplayerfreeze.freeze.FreezeFunctionality;
 
 import java.util.List;
 
@@ -37,16 +38,14 @@ public class FreezePlayer extends Command {
             return false;
         
         } else if (Util.isFrozen(player)) {
-            Util.setUnfrozen(player);
+            FreezeFunctionality.setUnfrozen(player);
             sender.sendMessage(Util.miniMessage.deserialize(ConfigSettings.unfreezeMessage,
                     Placeholder.component("name", player.displayName())));
-            player.sendRichMessage(ConfigSettings.haveBeenUnfrozen);
             return true;
         } else {
-            Util.setFrozen(player);
+            FreezeFunctionality.setFrozen(player);
             sender.sendMessage(Util.miniMessage.deserialize(ConfigSettings.freezeMessage,
                     Placeholder.component("name", player.displayName())));
-            player.sendRichMessage(ConfigSettings.haveBeenFrozen);
         }
         return true;
     }

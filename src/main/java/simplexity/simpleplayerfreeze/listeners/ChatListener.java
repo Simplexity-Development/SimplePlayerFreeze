@@ -12,7 +12,7 @@ public class ChatListener implements Listener {
         if (!ConfigSettings.preventChat) return;
         if (Util.isFrozen(chatEvent.getPlayer())) {
             chatEvent.setCancelled(true);
-            chatEvent.getPlayer().sendMessage("You are frozen! You cannot chat!");
+            chatEvent.getPlayer().sendRichMessage(ConfigSettings.cannotChat);
         }
     }
 

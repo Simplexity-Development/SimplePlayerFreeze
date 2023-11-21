@@ -1,20 +1,20 @@
 package simplexity.simpleplayerfreeze.listeners;
 
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.persistence.PersistentDataType;
 import simplexity.simpleplayerfreeze.ConfigSettings;
 import simplexity.simpleplayerfreeze.Util;
+import simplexity.simpleplayerfreeze.freeze.FreezeFunctionality;
 
 public class JoinListener implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent joinEvent) {
-        if (!ConfigSettings.freezePersist) return;
-        if (!joinEvent.getPlayer().isOp()) {
-            joinEvent.getPlayer().getPersistentDataContainer().set(Util.isFrozenKey, PersistentDataType.BOOLEAN, Boolean.TRUE);
-            Util.setFrozen(joinEvent.getPlayer());
-            joinEvent.getPlayer().sendRichMessage(ConfigSettings.loginMessage);
+        Player player = joinEvent.getPlayer();
+        if (Util.isFrozen(player) && ConfigSettings.freezePersist) {
+            FreezeFunctionality.setFrozen(player);
         }
     }
 

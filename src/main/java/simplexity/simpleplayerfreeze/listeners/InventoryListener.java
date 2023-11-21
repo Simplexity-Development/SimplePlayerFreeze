@@ -13,6 +13,7 @@ public class InventoryListener implements Listener {
         if (!(inventoryOpenEvent.getPlayer() instanceof Player player)) return;
         if (Util.isFrozen(player)) {
             inventoryOpenEvent.setCancelled(true);
+            inventoryOpenEvent.getInventory().close();
         }
     }
 }
