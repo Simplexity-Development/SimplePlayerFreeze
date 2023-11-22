@@ -1,0 +1,40 @@
+name: SimplePlayerFreeze
+main: simplexity.simpleplayerfreeze.SimplePlayerFreeze
+version: '${project.version}'
+api-version: '1.20'
+author: 'Rhythmic'
+website: 'https://github.com/Simplexity-Development/SimplePlayerFreeze'
+softdepend:
+  - 'PlaceholderAPI'
+permissions:
+  spf.freeze:
+    description: 'Allows the player to freeze other players'
+  spf.unfreeze:
+    description: 'Allows the player to unfreeze other players'
+  spf.notify:
+    description: 'Notifies this player when a frozen player logs in'
+  spf.bypass:
+    description: 'Makes this player immune to being frozen'
+  spf.reload:
+    description: 'Allows this player to reload the configuration'
+  spf.chatspy:
+    description: 'Allows this player to to see muted messages from frozen players'
+commands:
+  freeze:
+    permission: 'spf.freeze'
+    description: 'Freeze a player or unfreeze a frozen player'
+    usage: '/freeze <player>'
+  unfreeze:
+    permission: 'spf.unfreeze'
+    description: 'Unfreeze a frozen player'
+    usage: '/unfreeze <player>'
+  freezespy:
+    permission: 'spf.chatspy'
+    description: "Toggle personal visibility for frozen player's messages"
+    usage: '/fspy'
+    alias: 'fspy'
+  freezereload:
+    permission: 'spf.reload'
+    description: 'Reload the configuration of the SPF plugin'
+    usage: '/spfreload'
+    alias: 'spfreload'

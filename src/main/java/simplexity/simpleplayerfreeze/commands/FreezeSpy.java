@@ -1,6 +1,7 @@
 package simplexity.simpleplayerfreeze.commands;
 
 import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.persistence.PersistentDataType;
@@ -11,14 +12,11 @@ import simplexity.simpleplayerfreeze.listeners.JoinListener;
 
 import java.util.List;
 
-public class FreezeSpy extends Command {
+public class FreezeSpy implements CommandExecutor {
     
-    public FreezeSpy(@NotNull String name, @NotNull String description, @NotNull String usageMessage, @NotNull List<String> aliases) {
-        super(name, description, usageMessage, aliases);
-    }
     
     @Override
-    public boolean execute(@NotNull CommandSender sender, @NotNull String s, @NotNull String[] strings) {
+    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
         if (!sender.hasPermission(Util.freezeChatSpy)) {
             sender.sendRichMessage(ConfigSettings.noPermission);
             return false;

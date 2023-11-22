@@ -8,6 +8,7 @@ import simplexity.simpleplayerfreeze.commands.FreezeSpy;
 import simplexity.simpleplayerfreeze.commands.ReloadConfig;
 import simplexity.simpleplayerfreeze.commands.UnfreezePlayer;
 import simplexity.simpleplayerfreeze.listeners.*;
+import simplexity.simpleplayerfreeze.placeholderapi.IsFrozenPlaceholder;
 
 import java.util.List;
 
@@ -19,11 +20,16 @@ public final class SimplePlayerFreeze extends JavaPlugin {
     public void onEnable() {
         simplePlayerFreeze = this;
         server = getServer();
+        boolean papiEnabled = getServer().getPluginManager().isPluginEnabled("PlaceholderAPI");
+        System.out.println(papiEnabled);
         //Register the commands for the plugin, this is supposedly the best way to do commands now
-        getServer().getCommandMap().register(Util.namespace, new FreezePlayer("freeze", "Freezes a player in place and prevents them from using normal things", "/freeze <player>", List.of("cease")));
-        getServer().getCommandMap().register(Util.namespace, new UnfreezePlayer("unfreeze", "Unfreezes a player and allows them to use normal things", "/unfreeze <player>", List.of("resume")));
-        getServer().getCommandMap().register(Util.namespace, new ReloadConfig("freezereload", " reloads the config", "/freezereload", List.of("simpleplayerfreezereload", "spfreload")));
-        getServer().getCommandMap().register(Util.namespace, new FreezeSpy("freezespy", "Toggles the visibility of frozen players' messages", "/freezespy", List.of("fspy", "spfspy")));
+        this.getCommand("freeze").setExecutor(new FreezePlayer());
+        this.getCommand("unfreeze").setExecutor(new UnfreezePlayer());
+        this.getCommand("freezereload").setExecutor(new ReloadConfig());
+        this.getCommand("freezespy").setExecutor(new FreezeSpy());
+        if (papiEnabled) {
+            new IsFrozenPlaceholder().register();
+        }
         registerListeners();
         this.saveDefaultConfig();
         this.reloadConfig();

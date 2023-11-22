@@ -25,6 +25,7 @@ public class ConfigSettings {
     public static String freezeSpyEnabled = "";
     public static String freezeSpyDisabled = "";
     public static String onlyPlayer = "";
+    public static String placeholderAPIFormat = "";
     public static boolean freezePersist;
     public static boolean freezeGlow;
     public static boolean freezeDismount;
@@ -70,6 +71,7 @@ public class ConfigSettings {
         freezeSpyEnabled = config.getString("freeze-spy-enabled");
         freezeSpyDisabled = config.getString("freeze-spy-disabled");
         onlyPlayer = config.getString("only-player");
+        placeholderAPIFormat = config.getString("placeholder-api-format");
     }
     
     private static void reloadConfigBooleans() {
