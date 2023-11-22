@@ -1,8 +1,10 @@
 package simplexity.simpleplayerfreeze;
 
+import org.bukkit.Server;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import simplexity.simpleplayerfreeze.commands.FreezePlayer;
+import simplexity.simpleplayerfreeze.commands.FreezeSpy;
 import simplexity.simpleplayerfreeze.commands.ReloadConfig;
 import simplexity.simpleplayerfreeze.commands.UnfreezePlayer;
 import simplexity.simpleplayerfreeze.listeners.*;
@@ -11,14 +13,17 @@ import java.util.List;
 
 public final class SimplePlayerFreeze extends JavaPlugin {
     public static Plugin simplePlayerFreeze;
+    public static Server server;
     
     @Override
     public void onEnable() {
         simplePlayerFreeze = this;
+        server = getServer();
         //Register the commands for the plugin, this is supposedly the best way to do commands now
         getServer().getCommandMap().register(Util.namespace, new FreezePlayer("freeze", "Freezes a player in place and prevents them from using normal things", "/freeze <player>", List.of("cease")));
         getServer().getCommandMap().register(Util.namespace, new UnfreezePlayer("unfreeze", "Unfreezes a player and allows them to use normal things", "/unfreeze <player>", List.of("resume")));
         getServer().getCommandMap().register(Util.namespace, new ReloadConfig("freezereload", " reloads the config", "/freezereload", List.of("simpleplayerfreezereload", "spfreload")));
+        getServer().getCommandMap().register(Util.namespace, new FreezeSpy("freezespy", "Toggles the visibility of frozen players' messages", "/freezespy", List.of("fspy", "spfspy")));
         registerListeners();
         this.saveDefaultConfig();
         this.reloadConfig();

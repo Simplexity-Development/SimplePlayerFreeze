@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ConfigSettings {
-    
     public static String prefix = "";
     public static String commandErrorMessage = "";
     public static String cannotChat = "";
@@ -22,6 +21,10 @@ public class ConfigSettings {
     public static String loginNotif = "";
     public static String cannotBeFrozen = "";
     public static String notFrozen = "";
+    public static String shadowMuteFormat = "";
+    public static String freezeSpyEnabled = "";
+    public static String freezeSpyDisabled = "";
+    public static String onlyPlayer = "";
     public static boolean freezePersist;
     public static boolean freezeGlow;
     public static boolean freezeDismount;
@@ -30,7 +33,6 @@ public class ConfigSettings {
     public static boolean preventMovement;
     public static boolean preventInteract;
     public static boolean preventCrafting;
-    public static boolean preventChat;
     public static boolean preventXPPickup;
     public static boolean preventItemPickup;
     public static boolean preventItemDrop;
@@ -38,12 +40,14 @@ public class ConfigSettings {
     public static boolean preventHotbarSwitch;
     public static boolean preventInventoryInteraction;
     public static boolean preventCommands;
+    public static int chatBehavior;
     public static ArrayList<String> whitelistedCommandList = new ArrayList<>();
     
     public static void reloadConfigSettings(){
         reloadConfigBooleans();
         reloadMessages();
         reloadConfigCommands();
+        reloadConfigIntegers();
     }
     private static void reloadMessages() {
         FileConfiguration config = SimplePlayerFreeze.simplePlayerFreeze.getConfig();
@@ -62,7 +66,10 @@ public class ConfigSettings {
         loginNotif = config.getString("login-notif");
         cannotBeFrozen = config.getString("cannot-be-frozen");
         notFrozen = config.getString("not-frozen");
-        preventCommands = config.getBoolean("prevent-commands");
+        shadowMuteFormat = config.getString("shadow-mute-format");
+        freezeSpyEnabled = config.getString("freeze-spy-enabled");
+        freezeSpyDisabled = config.getString("freeze-spy-disabled");
+        onlyPlayer = config.getString("only-player");
     }
     
     private static void reloadConfigBooleans() {
@@ -75,12 +82,12 @@ public class ConfigSettings {
         preventMovement = config.getBoolean("prevent-movement");
         preventInteract = config.getBoolean("prevent-interact");
         preventCrafting = config.getBoolean("prevent-crafting");
-        preventChat = config.getBoolean("prevent-chat");
         preventXPPickup = config.getBoolean("prevent-xp-pickup");
         preventItemPickup = config.getBoolean("prevent-item-pickup");
         preventItemDrop = config.getBoolean("prevent-item-drop");
         preventItemUse = config.getBoolean("prevent-item-use");
         preventHotbarSwitch = config.getBoolean("prevent-hotbar-switch");
+        preventCommands = config.getBoolean("prevent-commands");
         preventInventoryInteraction = config.getBoolean("prevent-inventory-interaction");
     }
     
@@ -89,5 +96,14 @@ public class ConfigSettings {
         whitelistedCommandList.clear();
         List<String> commandList = config.getStringList("whitelisted-commands");
         whitelistedCommandList.addAll(commandList);
+    }
+    
+    private static void reloadConfigIntegers() {
+        FileConfiguration config = SimplePlayerFreeze.simplePlayerFreeze.getConfig();
+        chatBehavior = config.getInt("chat-behavior");
+        if (!( 0 <= chatBehavior && chatBehavior <= 2)) {
+            SimplePlayerFreeze.simplePlayerFreeze.getLogger().warning("Chat behavior value is invalid. Defaulting to 0.");
+            chatBehavior = 2;
+        }
     }
 }

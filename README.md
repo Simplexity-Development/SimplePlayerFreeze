@@ -13,6 +13,8 @@ A simple plugin that allows freezing and unfreezing players.
   - Prevents this user from being frozen
 - spf.reload:
   - Allows this user to reload the configuration
+- spf.chatspy
+  - Allows this user to see the chat of frozen players, if chat behavior is set to 2
 
 ### Commands:
 - /freeze <player>
@@ -21,6 +23,8 @@ A simple plugin that allows freezing and unfreezing players.
   - unfreezes a frozen player
 - /spfreload 
   - Reloads the configuration
+- /fspy
+  - Toggles visibility of the chat of frozen players, if chat behavior is set to 2
 
 ### Default configuration
 
@@ -37,10 +41,14 @@ freeze-dismount: true
 freeze-flight: false
 # Should the user be invulnerable while they're frozen? (prevents issues like drowning if frozen while underwater)
 freeze-invulnerability: true
+# Chat behavior
+# 0 = Chat as normal, no change
+# 1 = Shadow mute, they don't see a change in their chat, however only staff can see their messages
+# 2 = Full mute. They cannot send messages and get an error when they attempt to
+chat-behavior: 2
 # Which things should be prevented when someone is frozen?
 prevent-movement: true
 prevent-interact: true
-prevent-chat: true
 prevent-xp-pickup: true
 prevent-item-pickup: true
 prevent-item-drop: true
@@ -65,6 +73,10 @@ cannot-use-command: "You are frozen and cannot use that command"
 login-message: "<red><bold>[NOTICE]</bold></red> <gray>You were frozen during a previous session. You cannot move, interact, or chat"
 login-notif: "<dark_gray><bold><name></bold></dark_gray> <gray>has logged in. They were frozen during a previous session."
 login-notif-now-unfrozen: "<dark_gray><bold><name></bold></dark_gray> <gray>has logged in. They were frozen during a previous session. They will now be unfrozen."
+shadow-mute-format: "<dark_gray>[Frozen]</dark_gray> <gray><player>: <message></gray>"
+freeze-spy-enabled: "<green>Freeze Spy has been toggled <bold><yellow>On</yellow></bold>!</green>"
+freeze-spy-disabled: "<grey>Freeze Spy has been toggled <bold><red>Off</red></bold>!</grey>"
 cannot-be-frozen: "<red>That player cannot be frozen!</red>"
 not-frozen: "<red>That player is not frozen!</red>"
+only-player: "<red>Sorry! Only a player can run that command</red>"
 ```

@@ -13,8 +13,12 @@ permissions:
     description: 'allows this user to bypass being frozen'
   spf.reload:
     description: 'allows this user to reload the config'
+  spf.chatspy:
+    description: 'allows this user to see muted messages from frozen players'
 commands:
   freeze:
     permission: 'spf.freeze'
   unfreeze:
     permission: 'spf.unfreeze'
+  freezespy:
+    permission: 'spf.chatspy'
