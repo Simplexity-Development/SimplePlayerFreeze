@@ -1,4 +1,4 @@
-# Should freezing persist between restarts?
+# Should freezing persist between relogs?
 freeze-persist: true
 # Should someone glow when they are frozen?
 freeze-glow:  true

@@ -25,7 +25,7 @@ A simple plugin that allows freezing and unfreezing players.
 ### Default configuration
 
 ```yml
-# Should freezing persist between restarts?
+# Should freezing persist between relogs?
 freeze-persist: true
 # Should someone glow when they are frozen?
 freeze-glow:  true
