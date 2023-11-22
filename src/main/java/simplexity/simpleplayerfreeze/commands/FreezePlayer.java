@@ -38,7 +38,7 @@ public class FreezePlayer extends Command {
             sender.sendRichMessage(ConfigSettings.prefix + ConfigSettings.cannotBeFrozen);
             return false;
             
-        } else if (Util.isFrozen(player)) {
+        } else if (Util.isFrozen(player) && sender.hasPermission(Util.unfreezePermission)) {
             FreezeFunctionality.setUnfrozen(player);
             sender.sendMessage(Util.miniMessage.deserialize((ConfigSettings.prefix + ConfigSettings.unfreezeMessage),
                     Placeholder.component("name", player.displayName())));
