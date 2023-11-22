@@ -11,6 +11,7 @@ import java.util.List;
 
 public class ReloadConfig extends Command {
     
+    // Reloads the configuration
     
     public ReloadConfig(@NotNull String name, @NotNull String description, @NotNull String usageMessage, @NotNull List<String> aliases) {
         super(name, description, usageMessage, aliases);

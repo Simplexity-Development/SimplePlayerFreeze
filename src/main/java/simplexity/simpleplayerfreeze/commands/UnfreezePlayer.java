@@ -14,6 +14,8 @@ import java.util.List;
 
 public class UnfreezePlayer extends Command {
     
+    // Unfreezes a frozen player
+    
     public UnfreezePlayer(@NotNull String name, @NotNull String description, @NotNull String usageMessage, @NotNull List<String> aliases) {
         super(name, description, usageMessage, aliases);
     }
@@ -35,7 +37,7 @@ public class UnfreezePlayer extends Command {
             return true;
         }
         FreezeFunctionality.setUnfrozen(player);
-        sender.sendMessage(Util.miniMessage.deserialize(ConfigSettings.unfreezeMessage,
+        sender.sendMessage(Util.miniMessage.deserialize((ConfigSettings.prefix + ConfigSettings.unfreezeMessage),
                 Placeholder.component("name", player.displayName())));
         return true;
     }

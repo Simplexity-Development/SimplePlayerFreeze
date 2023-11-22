@@ -13,7 +13,8 @@ import simplexity.simpleplayerfreeze.freeze.FreezeFunctionality;
 import java.util.List;
 
 public class FreezePlayer extends Command {
-    //
+    
+    // Freezes the player, or unfreezes the player if they are already frozen.
     public FreezePlayer(@NotNull String name, @NotNull String description, @NotNull String usageMessage, @NotNull List<String> aliases) {
         super(name, description, usageMessage, aliases);
     }
@@ -36,15 +37,15 @@ public class FreezePlayer extends Command {
         } else if (player.hasPermission(Util.freezeBypassPermission)) {
             sender.sendRichMessage(ConfigSettings.prefix + ConfigSettings.cannotBeFrozen);
             return false;
-        
+            
         } else if (Util.isFrozen(player)) {
             FreezeFunctionality.setUnfrozen(player);
-            sender.sendMessage(Util.miniMessage.deserialize(ConfigSettings.unfreezeMessage,
+            sender.sendMessage(Util.miniMessage.deserialize((ConfigSettings.prefix + ConfigSettings.unfreezeMessage),
                     Placeholder.component("name", player.displayName())));
             return true;
         } else {
             FreezeFunctionality.setFrozen(player);
-            sender.sendMessage(Util.miniMessage.deserialize(ConfigSettings.freezeMessage,
+            sender.sendMessage(Util.miniMessage.deserialize((ConfigSettings.prefix + ConfigSettings.freezeMessage),
                     Placeholder.component("name", player.displayName())));
         }
         return true;

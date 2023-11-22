@@ -15,6 +15,7 @@ public class Util {
     public static Permission freezePermission = new Permission("spf.freeze");
     public static Permission unfreezePermission = new Permission("spf.unfreeze");
     public static Permission freezeBypassPermission = new Permission("spf.bypass");
+    public static Permission freezeNotify = new Permission("spf.notify");
     public static Permission reloadPermission = new Permission("spf.reload");
     
     
@@ -22,7 +23,7 @@ public class Util {
     
     
     public static boolean isFrozen(Player player) {
-        return player.getPersistentDataContainer().getOrDefault(isFrozenKey, PersistentDataType.BOOLEAN, Boolean.FALSE);
+        return player.getPersistentDataContainer().getOrDefault(isFrozenKey, PersistentDataType.BOOLEAN, false);
     }
     
 }

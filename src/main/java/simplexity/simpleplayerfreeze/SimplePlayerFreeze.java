@@ -30,10 +30,13 @@ public final class SimplePlayerFreeze extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new DropListener(), this);
         getServer().getPluginManager().registerEvents(new EXPPickupListener(), this);
         getServer().getPluginManager().registerEvents(new InteractListener(), this);
-        getServer().getPluginManager().registerEvents(new InventoryListener(), this);
+        getServer().getPluginManager().registerEvents(new CraftingListener(), this);
+        getServer().getPluginManager().registerEvents(new LeaveListener(), this);
         getServer().getPluginManager().registerEvents(new JoinListener(), this);
         getServer().getPluginManager().registerEvents(new MoveListener(), this);
         getServer().getPluginManager().registerEvents(new PickupListener(), this);
         getServer().getPluginManager().registerEvents(new SwitchItemListener(), this);
+        getServer().getPluginManager().registerEvents(new ItemConsumeListener(), this);
+        getServer().getPluginManager().registerEvents(new CommandListener(), this);
     }
 }
