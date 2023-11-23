@@ -9,6 +9,7 @@ import simplexity.simpleplayerfreeze.SimplePlayerFreeze;
 import simplexity.simpleplayerfreeze.Util;
 
 public class IsFrozenPlaceholder extends PlaceholderExpansion {
+    
     @Override
     public @NotNull String getIdentifier() {
         return "spf";
@@ -26,7 +27,7 @@ public class IsFrozenPlaceholder extends PlaceholderExpansion {
     
     @Override
     public String onRequest(OfflinePlayer offlinePlayer, @NotNull String params) {
-        if (params.equalsIgnoreCase("frozen")) {
+        if (params.equalsIgnoreCase("frozenprefix")) {
             Player player = offlinePlayer.getPlayer();
             if (player == null) {
                 return "Offline";
@@ -39,7 +40,19 @@ public class IsFrozenPlaceholder extends PlaceholderExpansion {
             }
             return "";
         }
-        return null;
+        if (params.equalsIgnoreCase("frozenbool")) {
+            Player player = offlinePlayer.getPlayer();
+            if (player == null) {
+                return "Offline";
+            }
+            if (Util.isFrozen(player)) {
+                return "true";
+            }
+            if (!Util.isFrozen(player)) {
+                return "false";
+            }
+        }
+        return "";
     }
-
+    
 }
