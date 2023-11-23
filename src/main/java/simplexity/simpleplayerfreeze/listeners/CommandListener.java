@@ -19,5 +19,5 @@ public class CommandListener implements Listener {
             commandEvent.setCancelled(true);
         }
     }
-
+    
 }

@@ -1,11 +1,11 @@
 name: SimplePlayerFreeze
 main: simplexity.simpleplayerfreeze.SimplePlayerFreeze
 version: '${project.version}'
-api-version: '1.20'
+api-version: '1.19'
 author: 'Rhythmic'
 website: 'https://github.com/Simplexity-Development/SimplePlayerFreeze'
-softdepend:
-  - 'PlaceholderAPI'
+depend: []
+softdepend: [PlaceholderAPI]
 permissions:
   spf.freeze:
     description: 'Allows the player to freeze other players'

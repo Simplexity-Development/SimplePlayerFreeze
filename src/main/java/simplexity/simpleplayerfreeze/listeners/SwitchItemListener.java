@@ -7,6 +7,7 @@ import simplexity.simpleplayerfreeze.ConfigSettings;
 import simplexity.simpleplayerfreeze.Util;
 
 public class SwitchItemListener implements Listener {
+    
     @EventHandler
     public void onSwitchItem(PlayerItemHeldEvent itemHeldEvent) {
         if (!ConfigSettings.preventHotbarSwitch) return;
@@ -14,5 +15,5 @@ public class SwitchItemListener implements Listener {
             itemHeldEvent.setCancelled(true);
         }
     }
-
+    
 }

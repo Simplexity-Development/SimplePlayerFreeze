@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ConfigSettings {
+    
     public static String prefix = "";
     public static String commandErrorMessage = "";
     public static String cannotChat = "";
@@ -44,12 +45,13 @@ public class ConfigSettings {
     public static int chatBehavior;
     public static ArrayList<String> whitelistedCommandList = new ArrayList<>();
     
-    public static void reloadConfigSettings(){
+    public static void reloadConfigSettings() {
         reloadConfigBooleans();
         reloadMessages();
         reloadConfigCommands();
         reloadConfigIntegers();
     }
+    
     private static void reloadMessages() {
         FileConfiguration config = SimplePlayerFreeze.simplePlayerFreeze.getConfig();
         prefix = config.getString("prefix");
@@ -103,7 +105,7 @@ public class ConfigSettings {
     private static void reloadConfigIntegers() {
         FileConfiguration config = SimplePlayerFreeze.simplePlayerFreeze.getConfig();
         chatBehavior = config.getInt("chat-behavior");
-        if (!( 0 <= chatBehavior && chatBehavior <= 2)) {
+        if (!(0 <= chatBehavior && chatBehavior <= 2)) {
             SimplePlayerFreeze.simplePlayerFreeze.getLogger().warning("Chat behavior value is invalid. Defaulting to 0.");
             chatBehavior = 2;
         }

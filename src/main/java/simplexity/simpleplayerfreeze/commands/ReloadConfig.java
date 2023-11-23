@@ -8,8 +8,6 @@ import simplexity.simpleplayerfreeze.ConfigSettings;
 import simplexity.simpleplayerfreeze.SimplePlayerFreeze;
 import simplexity.simpleplayerfreeze.Util;
 
-import java.util.List;
-
 public class ReloadConfig implements CommandExecutor {
     
     // Reloads the configuration

@@ -7,6 +7,7 @@ import simplexity.simpleplayerfreeze.ConfigSettings;
 import simplexity.simpleplayerfreeze.Util;
 
 public class EXPPickupListener implements Listener {
+    
     @EventHandler
     public void onEXPPickup(PlayerPickupExperienceEvent event) {
         if (!ConfigSettings.preventXPPickup) return;

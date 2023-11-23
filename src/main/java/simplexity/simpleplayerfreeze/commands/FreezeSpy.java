@@ -10,8 +10,6 @@ import simplexity.simpleplayerfreeze.ConfigSettings;
 import simplexity.simpleplayerfreeze.Util;
 import simplexity.simpleplayerfreeze.listeners.JoinListener;
 
-import java.util.List;
-
 public class FreezeSpy implements CommandExecutor {
     
     

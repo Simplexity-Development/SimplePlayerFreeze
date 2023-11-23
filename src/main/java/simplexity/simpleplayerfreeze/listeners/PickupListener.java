@@ -8,13 +8,14 @@ import simplexity.simpleplayerfreeze.ConfigSettings;
 import simplexity.simpleplayerfreeze.Util;
 
 public class PickupListener implements Listener {
+    
     @EventHandler
-    public void onPickup(EntityPickupItemEvent pickupEvent){
+    public void onPickup(EntityPickupItemEvent pickupEvent) {
         if (!ConfigSettings.preventItemPickup) return;
         if (!(pickupEvent.getEntity() instanceof Player player)) return;
         if (Util.isFrozen(player)) {
             pickupEvent.setCancelled(true);
         }
     }
-
+    
 }

@@ -7,6 +7,7 @@ import simplexity.simpleplayerfreeze.ConfigSettings;
 import simplexity.simpleplayerfreeze.Util;
 
 public class InteractListener implements Listener {
+    
     @EventHandler
     public void onInteract(PlayerInteractEvent interactEvent) {
         if (!ConfigSettings.preventInteract) return;
@@ -14,5 +15,5 @@ public class InteractListener implements Listener {
             interactEvent.setCancelled(true);
         }
     }
-
+    
 }

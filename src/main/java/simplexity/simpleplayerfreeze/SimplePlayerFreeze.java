@@ -10,8 +10,6 @@ import simplexity.simpleplayerfreeze.commands.UnfreezePlayer;
 import simplexity.simpleplayerfreeze.listeners.*;
 import simplexity.simpleplayerfreeze.placeholderapi.IsFrozenPlaceholder;
 
-import java.util.List;
-
 public final class SimplePlayerFreeze extends JavaPlugin {
     public static Plugin simplePlayerFreeze;
     public static Server server;

@@ -7,6 +7,7 @@ import simplexity.simpleplayerfreeze.ConfigSettings;
 import simplexity.simpleplayerfreeze.Util;
 
 public class MoveListener implements Listener {
+    
     @EventHandler
     public void onMove(PlayerMoveEvent moveEvent) {
         if (!ConfigSettings.preventMovement) return;
@@ -14,5 +15,5 @@ public class MoveListener implements Listener {
             moveEvent.setCancelled(true);
         }
     }
-
+    
 }
