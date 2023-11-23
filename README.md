@@ -57,8 +57,21 @@ prevent-hotbar-switch: true
 prevent-commands: true
 prevent-crafting: true
 whitelisted-commands:
+  # !! NOTE !! If you do not have the minecraft commands blocked by permissions, it is strongly advised
+  # Not to remove these from the whitelist due to chat signatures - if these commands are cancelled,
+  # The player will be kicked for a missing public key.
+  - /minecraft:msg
+  - /minecraft:w
+  - /minecraft:t
+  - /minecraft:teammsg
+  - /minecraft:tm
   - /msg
+  - /w
+  - /t
+  - /teammsg
+  - /tm
   - /r
+placeholder-api-format: "<dark_gray>[Frozen]</dark_gray>"
 #-------------------- [Locale] --------------------
 prefix: "<green><bold>[</bold><yellow>SPF</yellow><bold>]</bold></green> "
 no-permission: "<red>You do not have permission to run this command!</red>"
