@@ -16,11 +16,11 @@ public class FreezeSpy implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
         if (!sender.hasPermission(Util.freezeChatSpy)) {
-            sender.sendRichMessage(ConfigSettings.noPermission);
+            Util.sendErrorMessage( sender, ConfigSettings.noPermission);
             return false;
         }
         if (!(sender instanceof Player player)) {
-            sender.sendRichMessage(ConfigSettings.onlyPlayer);
+            Util.sendErrorMessage( sender, ConfigSettings.onlyPlayer);
             return false;
         }
         toggleSpy(player);
@@ -30,11 +30,11 @@ public class FreezeSpy implements CommandExecutor {
     private void toggleSpy(Player player) {
         if (!player.getPersistentDataContainer().getOrDefault(Util.freezeSpyDisabled, PersistentDataType.BOOLEAN, false)) {
             player.getPersistentDataContainer().set(Util.freezeSpyDisabled, PersistentDataType.BOOLEAN, true);
-            player.sendRichMessage(ConfigSettings.prefix + ConfigSettings.freezeSpyDisabled);
+            Util.sendUserMessage(player, ConfigSettings.freezeSpyDisabled);
             JoinListener.spyList.remove(player);
         } else {
             player.getPersistentDataContainer().set(Util.freezeSpyDisabled, PersistentDataType.BOOLEAN, false);
-            player.sendRichMessage(ConfigSettings.prefix + ConfigSettings.freezeSpyEnabled);
+            Util.sendUserMessage(player, ConfigSettings.freezeSpyEnabled);
             JoinListener.spyList.add(player);
         }
     }

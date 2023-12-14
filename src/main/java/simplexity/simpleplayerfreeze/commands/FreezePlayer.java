@@ -1,6 +1,5 @@
 package simplexity.simpleplayerfreeze.commands;
 
-import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -17,30 +16,28 @@ public class FreezePlayer implements CommandExecutor {
     
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
         if (!sender.hasPermission(Util.freezePermission)) {
-            sender.sendRichMessage(ConfigSettings.noPermission);
+            Util.sendErrorMessage(sender, ConfigSettings.noPermission);
             return false;
         }
         if (strings.length == 0) {
-            sender.sendRichMessage(ConfigSettings.prefix + ConfigSettings.noPlayer);
+            Util.sendErrorMessage(sender, ConfigSettings.noPlayer);
             return false;
         }
         Player player;
         player = Bukkit.getPlayer(strings[0]);
         if (player == null) {
-            sender.sendRichMessage(ConfigSettings.prefix + ConfigSettings.noPlayer);
+            Util.sendErrorMessage(sender, ConfigSettings.noPermission);
             return false;
         } else if (player.hasPermission(Util.freezeBypassPermission)) {
-            sender.sendRichMessage(ConfigSettings.prefix + ConfigSettings.cannotBeFrozen);
+            Util.sendErrorMessage( sender, ConfigSettings.cannotBeFrozen);
             return false;
         } else if (Util.isFrozen(player) && sender.hasPermission(Util.unfreezePermission)) {
             FreezeFunctionality.setUnfrozen(player);
-            sender.sendMessage(Util.miniMessage.deserialize((ConfigSettings.prefix + ConfigSettings.unfreezeMessage),
-                    Placeholder.component("name", player.displayName())));
+            Util.sendUserMessageWithPlayer(sender, ConfigSettings.unfreezeMessage, player);
             return true;
         } else {
             FreezeFunctionality.setFrozen(player);
-            sender.sendMessage(Util.miniMessage.deserialize((ConfigSettings.prefix + ConfigSettings.freezeMessage),
-                    Placeholder.component("name", player.displayName())));
+            Util.sendUserMessageWithPlayer(sender, ConfigSettings.freezeMessage, player);
         }
         return true;
     }

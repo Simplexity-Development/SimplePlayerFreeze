@@ -22,7 +22,7 @@ public class FreezeFunctionality {
             player.setInvulnerable(true);
         }
         player.setWalkSpeed(0f);
-        player.sendRichMessage(ConfigSettings.haveBeenFrozen);
+        Util.sendUserMessage(player, ConfigSettings.haveBeenFrozen);
     }
     
     public static void setUnfrozen(Player player) {
@@ -31,7 +31,7 @@ public class FreezeFunctionality {
         player.setInvulnerable(false);
         player.setGlowing(false);
         player.setWalkSpeed(0.2f);
-        player.sendRichMessage(ConfigSettings.haveBeenUnfrozen);
+        Util.sendUserMessageWithPlayer(player, ConfigSettings.haveBeenUnfrozen, player);
     }
     
     public static void enableFlight(Player player) {

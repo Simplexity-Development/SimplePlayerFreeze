@@ -12,9 +12,13 @@ freeze-flight: false
 freeze-invulnerability: true
 # Chat behavior
 # 0 = Chat as normal, no change
-# 1 = Shadow mute, they don't see a change in their chat, however only staff can see their messages
-# 2 = Full mute. They cannot send messages and get an error when they attempt to
+# 1 = Full mute. They cannot send messages and get an error when they attempt to
+# 2 = Shadow mute, they don't see a change in their chat, however only staff can see their messages
 chat-behavior: 2
+# Should console spy on attempted messages in chat behavior 2?
+console-sees-muted-messages: true
+# Should console be notified when someone who is frozen logs in?
+console-freeze-login-notified: true
 # Which things should be prevented when someone is frozen?
 prevent-movement: true
 prevent-interact: true
@@ -55,6 +59,9 @@ cannot-use-command: "You are frozen and cannot use that command"
 login-message: "<red><bold>[NOTICE]</bold></red> <gray>You were frozen during a previous session. You cannot move, interact, or chat"
 login-notif: "<dark_gray><bold><name></bold></dark_gray> <gray>has logged in. They were frozen during a previous session."
 login-notif-now-unfrozen: "<dark_gray><bold><name></bold></dark_gray> <gray>has logged in. They were frozen during a previous session. They will now be unfrozen."
+login-notif-console: "[Simple Freeze] <name> logged in while frozen"
+login-notif-console-unfreezing: "[Simple Freeze] <name> logged in while frozen- unfreezing."
+# <player> and <message> placeholders
 shadow-mute-format: "<dark_gray>[Frozen]</dark_gray> <gray><player>: <message></gray>"
 freeze-spy-enabled: "<green>Freeze Spy has been toggled <bold><yellow>On</yellow></bold>!</green>"
 freeze-spy-disabled: "<grey>Freeze Spy has been toggled <bold><red>Off</red></bold>!</grey>"

@@ -2,7 +2,6 @@ package simplexity.simpleplayerfreeze.listeners;
 
 import io.papermc.paper.event.player.AsyncChatEvent;
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -19,7 +18,7 @@ public class ChatListener implements Listener {
             case 1:
                 if (Util.isFrozen(chatEvent.getPlayer())) {
                     chatEvent.setCancelled(true);
-                    chatEvent.getPlayer().sendRichMessage(ConfigSettings.cannotChat);
+                    Util.sendErrorMessage(chatEvent.getPlayer(), ConfigSettings.cannotChat);
                 }
                 break;
             case 2:
@@ -28,15 +27,13 @@ public class ChatListener implements Listener {
                 chatEvent.viewers().clear();
                 chatEvent.viewers().add(chatEvent.getPlayer());
                 for (Player player : JoinListener.spyList) {
-                    player.sendMessage(Util.miniMessage.deserialize(
-                            ConfigSettings.shadowMuteFormat,
-                            Placeholder.component("player", chatEvent.getPlayer().displayName()),
-                            Placeholder.component("message", message)));
+                    Util.formatMutedMessages(player, ConfigSettings.shadowMuteFormat,
+                            chatEvent.getPlayer(), message);
                 }
-                SimplePlayerFreeze.server.getConsoleSender().sendMessage(Util.miniMessage.deserialize(
-                        ConfigSettings.shadowMuteFormat,
-                        Placeholder.component("player", chatEvent.getPlayer().displayName()),
-                        Placeholder.component("message", message)));
+                if (ConfigSettings.consoleSeesMutedMessages) {
+                    Util.formatMutedMessages(SimplePlayerFreeze.server.getConsoleSender(),
+                            ConfigSettings.shadowMuteFormat, chatEvent.getPlayer(), message);
+                }
                 break;
         }
         

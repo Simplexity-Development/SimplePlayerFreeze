@@ -8,40 +8,13 @@ import java.util.List;
 public class ConfigSettings {
     
     public static String prefix = "";
-    public static String commandErrorMessage = "";
-    public static String cannotChat = "";
-    public static String cannotUseCommand = "";
-    public static String freezeMessage = "";
-    public static String unfreezeMessage = "";
-    public static String reloadMessage = "";
-    public static String haveBeenFrozen = "";
-    public static String haveBeenUnfrozen = "";
-    public static String noPermission = "";
-    public static String noPlayer = "";
-    public static String loginMessage = "";
-    public static String loginNotif = "";
-    public static String cannotBeFrozen = "";
-    public static String notFrozen = "";
-    public static String shadowMuteFormat = "";
-    public static String freezeSpyEnabled = "";
-    public static String freezeSpyDisabled = "";
-    public static String onlyPlayer = "";
-    public static String placeholderAPIFormat = "";
-    public static boolean freezePersist;
-    public static boolean freezeGlow;
-    public static boolean freezeDismount;
-    public static boolean freezeFlight;
-    public static boolean freezeInvulnerability;
-    public static boolean preventMovement;
-    public static boolean preventInteract;
-    public static boolean preventCrafting;
-    public static boolean preventXPPickup;
-    public static boolean preventItemPickup;
-    public static boolean preventItemDrop;
-    public static boolean preventItemUse;
-    public static boolean preventHotbarSwitch;
-    public static boolean preventInventoryInteraction;
-    public static boolean preventCommands;
+    public static String commandErrorMessage, cannotChat, cannotUseCommand, freezeMessage, unfreezeMessage ,
+            reloadMessage, haveBeenFrozen, haveBeenUnfrozen, noPermission, noPlayer, loginMessage, loginNotif,
+            loginNotifNowUnfrozen, loginNotifConsole, loginNotifConsoleUnfreezing, cannotBeFrozen, notFrozen, shadowMuteFormat,
+            freezeSpyEnabled, freezeSpyDisabled, onlyPlayer, placeholderAPIFormat;
+    public static boolean freezePersist, freezeGlow, freezeDismount, freezeFlight, freezeInvulnerability, preventMovement,
+            preventInteract, preventCrafting, preventXPPickup, preventItemPickup, preventItemDrop, preventItemUse,
+            preventHotbarSwitch, preventInventoryInteraction, preventCommands, consoleSeesMutedMessages;
     public static int chatBehavior;
     public static ArrayList<String> whitelistedCommandList = new ArrayList<>();
     
@@ -67,6 +40,9 @@ public class ConfigSettings {
         noPlayer = config.getString("no-player");
         loginMessage = config.getString("login-message");
         loginNotif = config.getString("login-notif");
+        loginNotifNowUnfrozen = config.getString("login-notif-now-unfrozen");
+        loginNotifConsole = config.getString("login-notif-console");
+        loginNotifConsoleUnfreezing = config.getString("login-notif-console-unfreezing");
         cannotBeFrozen = config.getString("cannot-be-frozen");
         notFrozen = config.getString("not-frozen");
         shadowMuteFormat = config.getString("shadow-mute-format");
@@ -93,6 +69,7 @@ public class ConfigSettings {
         preventHotbarSwitch = config.getBoolean("prevent-hotbar-switch");
         preventCommands = config.getBoolean("prevent-commands");
         preventInventoryInteraction = config.getBoolean("prevent-inventory-interaction");
+        consoleSeesMutedMessages = config.getBoolean("console-sees-muted-messages");
     }
     
     private static void reloadConfigCommands() {

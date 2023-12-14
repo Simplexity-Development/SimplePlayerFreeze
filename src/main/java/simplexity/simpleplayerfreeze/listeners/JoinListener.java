@@ -1,6 +1,5 @@
 package simplexity.simpleplayerfreeze.listeners;
 
-import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -29,17 +28,17 @@ public class JoinListener implements Listener {
         if (Util.isFrozen(player) && ConfigSettings.freezePersist) {
             FreezeFunctionality.setFrozen(player);
             for (Player playerNotif : notifyList) {
-                playerNotif.sendMessage(Util.miniMessage.deserialize(
-                        (ConfigSettings.prefix + ConfigSettings.loginNotif), Placeholder.component("name", player.displayName())));
+                Util.sendUserMessageWithPlayer(playerNotif, ConfigSettings.loginNotif, player);
             }
-            SimplePlayerFreeze.server.getConsoleSender().sendMessage(Util.miniMessage.deserialize(
-                    (ConfigSettings.prefix + ConfigSettings.loginNotif), Placeholder.component("name", player.displayName())));
+            Util.sendUserMessageWithPlayer(SimplePlayerFreeze.getSFConsoleSender(),
+                    ConfigSettings.loginNotifConsole, player);
         } else if (Util.isFrozen(player)) {
             FreezeFunctionality.setUnfrozen(player);
             for (Player playerNotif : notifyList) {
-                playerNotif.sendMessage(Util.miniMessage.deserialize(
-                        (ConfigSettings.prefix + ConfigSettings.loginNotif), Placeholder.component("name", player.displayName())));
+                Util.sendUserMessageWithPlayer(playerNotif, ConfigSettings.loginNotifNowUnfrozen, player);
             }
+            Util.sendUserMessageWithPlayer(SimplePlayerFreeze.getSFConsoleSender(),
+                    ConfigSettings.loginNotifConsoleUnfreezing, player);
         }
     }
     

@@ -1,6 +1,7 @@
 package simplexity.simpleplayerfreeze;
 
 import org.bukkit.Server;
+import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import simplexity.simpleplayerfreeze.commands.FreezePlayer;
@@ -13,11 +14,13 @@ import simplexity.simpleplayerfreeze.placeholderapi.IsFrozenPlaceholder;
 public final class SimplePlayerFreeze extends JavaPlugin {
     public static Plugin simplePlayerFreeze;
     public static Server server;
+    public static ConsoleCommandSender sfConsoleSender;
     
     @Override
     public void onEnable() {
         simplePlayerFreeze = this;
         server = getServer();
+        sfConsoleSender = server.getConsoleSender();
         boolean papiEnabled = getServer().getPluginManager().isPluginEnabled("PlaceholderAPI");
         System.out.println(papiEnabled);
         //Register the commands for the plugin, this is supposedly the best way to do commands now
@@ -47,5 +50,9 @@ public final class SimplePlayerFreeze extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new SwitchItemListener(), this);
         getServer().getPluginManager().registerEvents(new ItemConsumeListener(), this);
         getServer().getPluginManager().registerEvents(new CommandListener(), this);
+    }
+    
+    public static ConsoleCommandSender getSFConsoleSender() {
+        return sfConsoleSender;
     }
 }

@@ -20,7 +20,7 @@ public class ReloadConfig implements CommandExecutor {
         }
         SimplePlayerFreeze.simplePlayerFreeze.reloadConfig();
         ConfigSettings.reloadConfigSettings();
-        sender.sendRichMessage(ConfigSettings.prefix + ConfigSettings.reloadMessage);
+        Util.sendUserMessage(sender, ConfigSettings.reloadMessage);
         return true;
     }
 }

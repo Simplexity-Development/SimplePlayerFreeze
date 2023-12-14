@@ -1,6 +1,5 @@
 package simplexity.simpleplayerfreeze.commands;
 
-import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -19,21 +18,20 @@ public class UnfreezePlayer implements CommandExecutor {
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
         if (!sender.hasPermission(Util.unfreezePermission)) return false;
         if (strings.length == 0) {
-            sender.sendRichMessage(ConfigSettings.prefix + ConfigSettings.noPlayer);
+            Util.sendErrorMessage(sender, ConfigSettings.noPlayer);
             return false;
         }
         Player player;
         player = Bukkit.getPlayer(strings[0]);
         if (player == null) {
-            sender.sendRichMessage(ConfigSettings.prefix + ConfigSettings.noPlayer);
+            Util.sendErrorMessage(sender, ConfigSettings.noPlayer);
             return false;
         } else if (!Util.isFrozen(player)) {
-            sender.sendRichMessage(ConfigSettings.prefix + ConfigSettings.notFrozen);
+            Util.sendErrorMessage(sender, ConfigSettings.notFrozen);
             return true;
         }
         FreezeFunctionality.setUnfrozen(player);
-        sender.sendMessage(Util.miniMessage.deserialize((ConfigSettings.prefix + ConfigSettings.unfreezeMessage),
-                Placeholder.component("name", player.displayName())));
+        Util.sendUserMessageWithPlayer(sender, ConfigSettings.unfreezeMessage, player);
         return true;
     }
     

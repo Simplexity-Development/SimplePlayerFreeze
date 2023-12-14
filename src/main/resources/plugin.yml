@@ -10,16 +10,22 @@ softdepend:
 permissions:
   spf.freeze:
     description: 'Allows the player to freeze other players'
+    default: op
   spf.unfreeze:
     description: 'Allows the player to unfreeze other players'
+    default: op
   spf.notify:
     description: 'Notifies this player when a frozen player logs in'
+    default: op
   spf.bypass:
     description: 'Makes this player immune to being frozen'
+    default: op
   spf.reload:
     description: 'Allows this player to reload the configuration'
+    default: op
   spf.chatspy:
     description: 'Allows this player to to see muted messages from frozen players'
+    default: op
 commands:
   freeze:
     permission: 'spf.freeze'
