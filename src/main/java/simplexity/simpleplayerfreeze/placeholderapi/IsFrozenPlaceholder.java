@@ -4,7 +4,7 @@ import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
-import simplexity.simpleplayerfreeze.ConfigSettings;
+import simplexity.simpleplayerfreeze.configs.ConfigHandler;
 import simplexity.simpleplayerfreeze.SimplePlayerFreeze;
 import simplexity.simpleplayerfreeze.Util;
 
@@ -17,12 +17,12 @@ public class IsFrozenPlaceholder extends PlaceholderExpansion {
     
     @Override
     public @NotNull String getAuthor() {
-        return SimplePlayerFreeze.simplePlayerFreeze.getDescription().getAuthors().toString();
+        return SimplePlayerFreeze.getInstance().getDescription().getAuthors().toString();
     }
     
     @Override
     public @NotNull String getVersion() {
-        return SimplePlayerFreeze.simplePlayerFreeze.getDescription().getVersion();
+        return SimplePlayerFreeze.getInstance().getDescription().getVersion();
     }
     
     @Override
@@ -33,7 +33,7 @@ public class IsFrozenPlaceholder extends PlaceholderExpansion {
                 return "Offline";
             }
             if (Util.isFrozen(player)) {
-                return ConfigSettings.placeholderAPIFormat;
+                return ConfigHandler.getInstance().getPlaceholderAPIFormat();
             }
             if (!Util.isFrozen(player)) {
                 return "";

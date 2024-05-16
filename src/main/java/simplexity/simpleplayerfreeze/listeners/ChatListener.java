@@ -5,20 +5,22 @@ import net.kyori.adventure.text.Component;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import simplexity.simpleplayerfreeze.ConfigSettings;
+import simplexity.simpleplayerfreeze.configs.ConfigHandler;
 import simplexity.simpleplayerfreeze.SimplePlayerFreeze;
 import simplexity.simpleplayerfreeze.Util;
+import simplexity.simpleplayerfreeze.configs.LocaleHandler;
 
 public class ChatListener implements Listener {
     
     @EventHandler
     public void onChat(AsyncChatEvent chatEvent) {
-        if (!(ConfigSettings.chatBehavior == 1 || ConfigSettings.chatBehavior == 2)) return;
-        switch (ConfigSettings.chatBehavior) {
+        String shadowMuteFormat = LocaleHandler.getInstance().getShadowMuteFormat();
+        if (!(ConfigHandler.chatBehavior == 1 || ConfigHandler.chatBehavior == 2)) return;
+        switch (ConfigHandler.chatBehavior) {
             case 1:
                 if (Util.isFrozen(chatEvent.getPlayer())) {
                     chatEvent.setCancelled(true);
-                    Util.sendErrorMessage(chatEvent.getPlayer(), ConfigSettings.cannotChat);
+                    Util.sendErrorMessage(chatEvent.getPlayer(), LocaleHandler.getInstance().getCannotChat());
                 }
                 break;
             case 2:
@@ -27,12 +29,12 @@ public class ChatListener implements Listener {
                 chatEvent.viewers().clear();
                 chatEvent.viewers().add(chatEvent.getPlayer());
                 for (Player player : JoinListener.spyList) {
-                    Util.formatMutedMessages(player, ConfigSettings.shadowMuteFormat,
+                    Util.formatMutedMessages(player, shadowMuteFormat,
                             chatEvent.getPlayer(), message);
                 }
-                if (ConfigSettings.consoleSeesMutedMessages) {
+                if (ConfigHandler.getInstance().shouldConsoleSeesMutedMessages()) {
                     Util.formatMutedMessages(SimplePlayerFreeze.server.getConsoleSender(),
-                            ConfigSettings.shadowMuteFormat, chatEvent.getPlayer(), message);
+                            shadowMuteFormat, chatEvent.getPlayer(), message);
                 }
                 break;
         }

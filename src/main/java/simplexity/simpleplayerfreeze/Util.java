@@ -8,6 +8,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.permissions.Permission;
 import org.bukkit.persistence.PersistentDataType;
+import simplexity.simpleplayerfreeze.configs.ConfigHandler;
+import simplexity.simpleplayerfreeze.configs.LocaleHandler;
 
 public class Util {
     
@@ -29,12 +31,12 @@ public class Util {
     }
     public static void sendUserMessage(CommandSender sender, String message) {
         if (message.isEmpty()) return;
-        sender.sendMessage(miniMessage.deserialize(ConfigSettings.prefix + message));
+        sender.sendMessage(miniMessage.deserialize(LocaleHandler.getInstance().getPrefix() + message));
     }
     
     public static void sendUserMessageWithPlayer(CommandSender sender, String message, Player player) {
         if (message.isEmpty()) return;
-        sender.sendMessage(miniMessage.deserialize(ConfigSettings.prefix + message,
+        sender.sendMessage(miniMessage.deserialize(ConfigHandler.getInstance().getPrefix() + message,
                 Placeholder.component("name", player.displayName())));
     }
     

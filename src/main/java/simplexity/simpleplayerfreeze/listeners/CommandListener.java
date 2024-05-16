@@ -4,18 +4,19 @@ package simplexity.simpleplayerfreeze.listeners;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
-import simplexity.simpleplayerfreeze.ConfigSettings;
+import simplexity.simpleplayerfreeze.configs.ConfigHandler;
 import simplexity.simpleplayerfreeze.Util;
+import simplexity.simpleplayerfreeze.configs.LocaleHandler;
 
 public class CommandListener implements Listener {
     
     @EventHandler
     public void onCommand(PlayerCommandPreprocessEvent commandEvent) {
-        if (!ConfigSettings.preventCommands) return;
+        if (!ConfigHandler.getInstance().shouldPreventCommands()) return;
         if (!Util.isFrozen(commandEvent.getPlayer())) return;
         String command = commandEvent.getMessage().split(" ")[0];
-        if (!ConfigSettings.whitelistedCommandList.contains(command)) {
-            Util.sendErrorMessage(commandEvent.getPlayer(), ConfigSettings.cannotUseCommand);
+        if (!ConfigHandler.whitelistedCommandList.contains(command)) {
+            Util.sendErrorMessage(commandEvent.getPlayer(), LocaleHandler.getInstance().getCannotUseCommand());
             commandEvent.setCancelled(true);
         }
     }

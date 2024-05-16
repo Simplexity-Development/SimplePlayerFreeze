@@ -2,23 +2,23 @@ package simplexity.simpleplayerfreeze;
 
 import org.bukkit.Server;
 import org.bukkit.command.ConsoleCommandSender;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import simplexity.simpleplayerfreeze.commands.FreezePlayer;
 import simplexity.simpleplayerfreeze.commands.FreezeSpy;
 import simplexity.simpleplayerfreeze.commands.ReloadConfig;
 import simplexity.simpleplayerfreeze.commands.UnfreezePlayer;
+import simplexity.simpleplayerfreeze.configs.ConfigHandler;
 import simplexity.simpleplayerfreeze.listeners.*;
 import simplexity.simpleplayerfreeze.placeholderapi.IsFrozenPlaceholder;
 
 public final class SimplePlayerFreeze extends JavaPlugin {
-    public static Plugin simplePlayerFreeze;
+    public static SimplePlayerFreeze instance;
     public static Server server;
     public static ConsoleCommandSender sfConsoleSender;
     
     @Override
     public void onEnable() {
-        simplePlayerFreeze = this;
+        instance = this;
         server = getServer();
         sfConsoleSender = server.getConsoleSender();
         boolean papiEnabled = getServer().getPluginManager().isPluginEnabled("PlaceholderAPI");
@@ -34,7 +34,7 @@ public final class SimplePlayerFreeze extends JavaPlugin {
         registerListeners();
         this.saveDefaultConfig();
         this.reloadConfig();
-        ConfigSettings.reloadConfigSettings();
+        ConfigHandler.getInstance().reloadConfigSettings();
     }
     // Registers the Event Listeners for the events that will be blocked when someone is frozen
     private void registerListeners() {
@@ -54,5 +54,9 @@ public final class SimplePlayerFreeze extends JavaPlugin {
     
     public static ConsoleCommandSender getSFConsoleSender() {
         return sfConsoleSender;
+    }
+
+    public static SimplePlayerFreeze getInstance() {
+        return instance;
     }
 }

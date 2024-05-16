@@ -21,6 +21,7 @@ console-sees-muted-messages: true
 console-freeze-login-notified: true
 # Which things should be prevented when someone is frozen?
 prevent-movement: true
+prevent-walking: true
 prevent-interact: true
 prevent-xp-pickup: true
 prevent-item-pickup: true
@@ -29,6 +30,7 @@ prevent-item-use: true
 prevent-hotbar-switch: true
 prevent-commands: true
 prevent-crafting: true
+prevent-inventory-interaction: true
 whitelisted-commands:
 # !! NOTE !! If you do not have the minecraft commands blocked by permissions, it is strongly advised
 # Not to remove these from the whitelist due to chat signatures - if these commands are cancelled,
@@ -45,26 +47,3 @@ whitelisted-commands:
   - /tm
   - /r
 placeholder-api-format: "<dark_gray>[Frozen]</dark_gray>"
-#-------------------- [Locale] --------------------
-prefix: "<green><bold>[</bold><yellow>SPF</yellow><bold>]</bold></green> "
-no-permission: "<red>You do not have permission to run this command!</red>"
-no-player: "<red>You did not provide a valid player, please check your spelling and try again</red>"
-freeze-message: "<green><name></green> <aqua>has been frozen</aqua>"
-unfreeze-message: "<green><name></green> <yellow>has been unfrozen</yellow>"
-reload-message: "<gold>The Simple Player Freeze config has been reloaded</gold>"
-have-been-frozen: "<red><bold>[NOTICE]</bold></red> <gray>You have been frozen. You cannot move, interact, or chat"
-have-been-unfrozen: "<green><bold>[NOTICE]</bold></green> <gray>You have been unfrozen. You can move, interact, and chat again."
-cannot-chat: "You are frozen and cannot chat"
-cannot-use-command: "You are frozen and cannot use that command"
-login-message: "<red><bold>[NOTICE]</bold></red> <gray>You were frozen during a previous session. You cannot move, interact, or chat"
-login-notif: "<dark_gray><bold><name></bold></dark_gray> <gray>has logged in. They were frozen during a previous session."
-login-notif-now-unfrozen: "<dark_gray><bold><name></bold></dark_gray> <gray>has logged in. They were frozen during a previous session. They will now be unfrozen."
-login-notif-console: "[Simple Freeze] <name> logged in while frozen"
-login-notif-console-unfreezing: "[Simple Freeze] <name> logged in while frozen- unfreezing."
-# <player> and <message> placeholders
-shadow-mute-format: "<dark_gray>[Frozen]</dark_gray> <gray><player>: <message></gray>"
-freeze-spy-enabled: "<green>Freeze Spy has been toggled <bold><yellow>On</yellow></bold>!</green>"
-freeze-spy-disabled: "<grey>Freeze Spy has been toggled <bold><red>Off</red></bold>!</grey>"
-cannot-be-frozen: "<red>That player cannot be frozen!</red>"
-not-frozen: "<red>That player is not frozen!</red>"
-only-player: "<red>Sorry! Only a player can run that command</red>"
