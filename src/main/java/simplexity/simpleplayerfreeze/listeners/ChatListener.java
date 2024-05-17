@@ -5,13 +5,13 @@ import net.kyori.adventure.text.Component;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import simplexity.simpleplayerfreeze.configs.ConfigHandler;
 import simplexity.simpleplayerfreeze.SimplePlayerFreeze;
 import simplexity.simpleplayerfreeze.Util;
+import simplexity.simpleplayerfreeze.configs.ConfigHandler;
 import simplexity.simpleplayerfreeze.configs.LocaleHandler;
 
 public class ChatListener implements Listener {
-    
+
     @EventHandler
     public void onChat(AsyncChatEvent chatEvent) {
         String shadowMuteFormat = LocaleHandler.getInstance().getShadowMuteFormat();
@@ -38,7 +38,7 @@ public class ChatListener implements Listener {
                 }
                 break;
         }
-        
+
     }
-    
+
 }

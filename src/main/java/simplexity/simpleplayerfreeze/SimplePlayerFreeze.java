@@ -8,14 +8,25 @@ import simplexity.simpleplayerfreeze.commands.FreezeSpy;
 import simplexity.simpleplayerfreeze.commands.ReloadConfig;
 import simplexity.simpleplayerfreeze.commands.UnfreezePlayer;
 import simplexity.simpleplayerfreeze.configs.ConfigHandler;
-import simplexity.simpleplayerfreeze.listeners.*;
+import simplexity.simpleplayerfreeze.listeners.ChatListener;
+import simplexity.simpleplayerfreeze.listeners.CommandListener;
+import simplexity.simpleplayerfreeze.listeners.CraftingListener;
+import simplexity.simpleplayerfreeze.listeners.DropListener;
+import simplexity.simpleplayerfreeze.listeners.EXPPickupListener;
+import simplexity.simpleplayerfreeze.listeners.InteractListener;
+import simplexity.simpleplayerfreeze.listeners.ItemConsumeListener;
+import simplexity.simpleplayerfreeze.listeners.JoinListener;
+import simplexity.simpleplayerfreeze.listeners.LeaveListener;
+import simplexity.simpleplayerfreeze.listeners.MoveListener;
+import simplexity.simpleplayerfreeze.listeners.PickupListener;
+import simplexity.simpleplayerfreeze.listeners.SwitchItemListener;
 import simplexity.simpleplayerfreeze.placeholderapi.IsFrozenPlaceholder;
 
 public final class SimplePlayerFreeze extends JavaPlugin {
     public static SimplePlayerFreeze instance;
     public static Server server;
     public static ConsoleCommandSender sfConsoleSender;
-    
+
     @Override
     public void onEnable() {
         instance = this;
@@ -36,6 +47,7 @@ public final class SimplePlayerFreeze extends JavaPlugin {
         this.reloadConfig();
         ConfigHandler.getInstance().reloadConfigSettings();
     }
+
     // Registers the Event Listeners for the events that will be blocked when someone is frozen
     private void registerListeners() {
         getServer().getPluginManager().registerEvents(new ChatListener(), this);
@@ -51,7 +63,7 @@ public final class SimplePlayerFreeze extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new ItemConsumeListener(), this);
         getServer().getPluginManager().registerEvents(new CommandListener(), this);
     }
-    
+
     public static ConsoleCommandSender getSFConsoleSender() {
         return sfConsoleSender;
     }

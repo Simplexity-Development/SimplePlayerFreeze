@@ -4,27 +4,27 @@ import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
-import simplexity.simpleplayerfreeze.configs.ConfigHandler;
 import simplexity.simpleplayerfreeze.SimplePlayerFreeze;
 import simplexity.simpleplayerfreeze.Util;
+import simplexity.simpleplayerfreeze.configs.ConfigHandler;
 
 public class IsFrozenPlaceholder extends PlaceholderExpansion {
-    
+
     @Override
     public @NotNull String getIdentifier() {
         return "spf";
     }
-    
+
     @Override
     public @NotNull String getAuthor() {
         return SimplePlayerFreeze.getInstance().getDescription().getAuthors().toString();
     }
-    
+
     @Override
     public @NotNull String getVersion() {
         return SimplePlayerFreeze.getInstance().getDescription().getVersion();
     }
-    
+
     @Override
     public String onRequest(OfflinePlayer offlinePlayer, @NotNull String params) {
         if (params.equalsIgnoreCase("frozenprefix")) {
@@ -54,5 +54,5 @@ public class IsFrozenPlaceholder extends PlaceholderExpansion {
         }
         return "";
     }
-    
+
 }

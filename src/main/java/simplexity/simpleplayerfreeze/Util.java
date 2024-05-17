@@ -12,7 +12,7 @@ import simplexity.simpleplayerfreeze.configs.ConfigHandler;
 import simplexity.simpleplayerfreeze.configs.LocaleHandler;
 
 public class Util {
-    
+
     public static MiniMessage miniMessage = MiniMessage.miniMessage();
     public static String namespace = "simpleplayerfreeze";
     public static NamespacedKey isFrozenKey = new NamespacedKey(namespace, "isfrozen");
@@ -24,32 +24,33 @@ public class Util {
     public static Permission freezeNotify = new Permission("spf.notify");
     public static Permission freezeChatSpy = new Permission("spf.chatspy");
     public static Permission reloadPermission = new Permission("spf.reload");
-    
+
     public static void sendErrorMessage(CommandSender sender, String message) {
         if (message.isEmpty()) return;
         sender.sendMessage(miniMessage.deserialize(message));
     }
+
     public static void sendUserMessage(CommandSender sender, String message) {
         if (message.isEmpty()) return;
         sender.sendMessage(miniMessage.deserialize(LocaleHandler.getInstance().getPrefix() + message));
     }
-    
+
     public static void sendUserMessageWithPlayer(CommandSender sender, String message, Player player) {
         if (message.isEmpty()) return;
         sender.sendMessage(miniMessage.deserialize(ConfigHandler.getInstance().getPrefix() + message,
                 Placeholder.component("name", player.displayName())));
     }
-    
+
     public static void formatMutedMessages(CommandSender sender, String format, Player player, Component message) {
         if (format.isEmpty()) return;
         sender.sendMessage(miniMessage.deserialize(format,
                 Placeholder.component("player", player.displayName()),
                 Placeholder.component("message", message)));
     }
-    
-    
+
+
     public static boolean isFrozen(Player player) {
         return player.getPersistentDataContainer().getOrDefault(isFrozenKey, PersistentDataType.BOOLEAN, false);
     }
-    
+
 }

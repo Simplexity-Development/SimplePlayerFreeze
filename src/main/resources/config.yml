@@ -22,6 +22,7 @@ console-freeze-login-notified: true
 # Which things should be prevented when someone is frozen?
 prevent-movement: true
 prevent-walking: true
+prevent-jumping: true
 prevent-interact: true
 prevent-xp-pickup: true
 prevent-item-pickup: true

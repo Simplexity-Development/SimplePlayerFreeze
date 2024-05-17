@@ -13,10 +13,14 @@ public class ConfigHandler {
     private String placeholderAPIFormat;
     private boolean freezePersist, freezeGlow, freezeDismount, freezeFlight, freezeInvulnerability, preventMovement,
             preventInteract, preventCrafting, preventXPPickup, preventItemPickup, preventItemDrop, preventItemUse,
-            preventHotbarSwitch, preventInventoryInteraction, preventWalking, preventCommands, consoleSeesMutedMessages, consoleFreezeLoginNotified;
+            preventHotbarSwitch, preventInventoryInteraction, preventWalking, preventCommands, consoleSeesMutedMessages,
+            consoleFreezeLoginNotified, preventJumping;
     public static int chatBehavior;
     public static ArrayList<String> whitelistedCommandList = new ArrayList<>();
-    private ConfigHandler(){}
+
+    private ConfigHandler() {
+    }
+
     public static ConfigHandler getInstance() {
         if (instance == null) instance = new ConfigHandler();
         return instance;
@@ -30,13 +34,13 @@ public class ConfigHandler {
         reloadConfigCommands();
         reloadConfigIntegers();
     }
-    
+
     private void reloadMessages() {
         FileConfiguration config = SimplePlayerFreeze.getInstance().getConfig();
         placeholderAPIFormat = config.getString("placeholder-api-format");
 
     }
-    
+
     private void reloadConfigBooleans() {
         FileConfiguration config = SimplePlayerFreeze.getInstance().getConfig();
         freezePersist = config.getBoolean("freeze-persist", true);
@@ -46,6 +50,7 @@ public class ConfigHandler {
         freezeInvulnerability = config.getBoolean("freeze-invulnerability", true);
         preventWalking = config.getBoolean("prevent-walking", true);
         preventMovement = config.getBoolean("prevent-movement", true);
+        preventJumping = config.getBoolean("prevent-jumping", true);
         preventInteract = config.getBoolean("prevent-interact", true);
         preventCrafting = config.getBoolean("prevent-crafting", true);
         preventXPPickup = config.getBoolean("prevent-xp-pickup", true);
@@ -58,14 +63,14 @@ public class ConfigHandler {
         consoleSeesMutedMessages = config.getBoolean("console-sees-muted-messages", true);
         consoleFreezeLoginNotified = config.getBoolean("console-freeze-login-notified", true);
     }
-    
+
     private static void reloadConfigCommands() {
         FileConfiguration config = SimplePlayerFreeze.getInstance().getConfig();
         whitelistedCommandList.clear();
         List<String> commandList = config.getStringList("whitelisted-commands");
         whitelistedCommandList.addAll(commandList);
     }
-    
+
     private static void reloadConfigIntegers() {
         FileConfiguration config = SimplePlayerFreeze.getInstance().getConfig();
         chatBehavior = config.getInt("chat-behavior");
@@ -153,5 +158,9 @@ public class ConfigHandler {
 
     public String getPrefix() {
         return prefix;
+    }
+
+    public boolean shouldPreventJumping() {
+        return preventJumping;
     }
 }

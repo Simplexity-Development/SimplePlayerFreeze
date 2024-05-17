@@ -4,19 +4,19 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
-import simplexity.simpleplayerfreeze.configs.ConfigHandler;
 import simplexity.simpleplayerfreeze.SimplePlayerFreeze;
 import simplexity.simpleplayerfreeze.Util;
+import simplexity.simpleplayerfreeze.configs.ConfigHandler;
 import simplexity.simpleplayerfreeze.configs.LocaleHandler;
 import simplexity.simpleplayerfreeze.freeze.FreezeFunctionality;
 
 import java.util.ArrayList;
 
 public class JoinListener implements Listener {
-    
+
     public static ArrayList<Player> notifyList = new ArrayList<>();
     public static ArrayList<Player> spyList = new ArrayList<>();
-    
+
     @EventHandler
     public void onJoin(PlayerJoinEvent joinEvent) {
         Player player = joinEvent.getPlayer();
@@ -42,5 +42,5 @@ public class JoinListener implements Listener {
                     LocaleHandler.getInstance().getLoginNotifConsoleUnfreezing(), player);
         }
     }
-    
+
 }

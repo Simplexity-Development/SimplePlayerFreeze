@@ -15,7 +15,7 @@ public class LocaleHandler {
     private final File localeFile = new File(SimplePlayerFreeze.getInstance().getDataFolder(), fileName);
     private final FileConfiguration localeConfig = new YamlConfiguration();
     private final Logger logger = SimplePlayerFreeze.getInstance().getLogger();
-    private String prefix, cannotChat, cannotUseCommand, freezeMessage, unfreezeMessage ,
+    private String prefix, cannotChat, cannotUseCommand, freezeMessage, unfreezeMessage,
             reloadMessage, haveBeenFrozen, haveBeenUnfrozen, noPermission, noPlayer, loginMessage, loginNotif,
             loginNotifNowUnfrozen, loginNotifConsole, loginNotifConsoleUnfreezing, cannotBeFrozen, notFrozen, shadowMuteFormat,
             freezeSpyEnabled, freezeSpyDisabled, onlyPlayer;
