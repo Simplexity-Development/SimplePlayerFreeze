@@ -7,6 +7,8 @@ import simplexity.simpleplayerfreeze.Util;
 import simplexity.simpleplayerfreeze.configs.ConfigHandler;
 import simplexity.simpleplayerfreeze.configs.LocaleHandler;
 
+import java.util.Objects;
+
 public class FreezeFunctionality {
 
     public static void setFrozen(Player player) {
@@ -27,7 +29,7 @@ public class FreezeFunctionality {
             player.setWalkSpeed(0f);
         }
         if (ConfigHandler.getInstance().shouldPreventJumping()) {
-            player.getAttribute(Attribute.GENERIC_GRAVITY).setBaseValue(1);
+            Objects.requireNonNull(player.getAttribute(Attribute.GENERIC_GRAVITY)).setBaseValue(1);
         }
         Util.sendUserMessage(player, LocaleHandler.getInstance().getHaveBeenFrozen());
     }
@@ -38,7 +40,7 @@ public class FreezeFunctionality {
         player.setInvulnerable(false);
         player.setGlowing(false);
         player.setWalkSpeed(0.2f);
-        player.getAttribute(Attribute.GENERIC_GRAVITY).setBaseValue(0.08);
+        Objects.requireNonNull(player.getAttribute(Attribute.GENERIC_GRAVITY)).setBaseValue(0.08);
         Util.sendUserMessageWithPlayer(player, LocaleHandler.getInstance().getHaveBeenUnfrozen(), player);
     }
 

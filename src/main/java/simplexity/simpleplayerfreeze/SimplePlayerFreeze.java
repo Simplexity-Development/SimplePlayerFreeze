@@ -34,7 +34,6 @@ public final class SimplePlayerFreeze extends JavaPlugin {
         sfConsoleSender = server.getConsoleSender();
         boolean papiEnabled = getServer().getPluginManager().isPluginEnabled("PlaceholderAPI");
         System.out.println(papiEnabled);
-        //Register the commands for the plugin, this is supposedly the best way to do commands now
         this.getCommand("freeze").setExecutor(new FreezePlayer());
         this.getCommand("unfreeze").setExecutor(new UnfreezePlayer());
         this.getCommand("freezereload").setExecutor(new ReloadConfig());
