@@ -8,12 +8,14 @@ import simplexity.simpleplayerfreeze.commands.FreezeSpy;
 import simplexity.simpleplayerfreeze.commands.ReloadConfig;
 import simplexity.simpleplayerfreeze.commands.UnfreezePlayer;
 import simplexity.simpleplayerfreeze.configs.ConfigHandler;
+import simplexity.simpleplayerfreeze.listeners.AttackListener;
 import simplexity.simpleplayerfreeze.listeners.ChatListener;
 import simplexity.simpleplayerfreeze.listeners.CommandListener;
 import simplexity.simpleplayerfreeze.listeners.CraftingListener;
 import simplexity.simpleplayerfreeze.listeners.DropListener;
 import simplexity.simpleplayerfreeze.listeners.EXPPickupListener;
 import simplexity.simpleplayerfreeze.listeners.InteractListener;
+import simplexity.simpleplayerfreeze.listeners.InventoryOpenListener;
 import simplexity.simpleplayerfreeze.listeners.ItemConsumeListener;
 import simplexity.simpleplayerfreeze.listeners.JoinListener;
 import simplexity.simpleplayerfreeze.listeners.LeaveListener;
@@ -61,6 +63,8 @@ public final class SimplePlayerFreeze extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new SwitchItemListener(), this);
         getServer().getPluginManager().registerEvents(new ItemConsumeListener(), this);
         getServer().getPluginManager().registerEvents(new CommandListener(), this);
+        getServer().getPluginManager().registerEvents(new AttackListener(), this);
+        getServer().getPluginManager().registerEvents(new InventoryOpenListener(), this);
     }
 
     public static ConsoleCommandSender getSFConsoleSender() {

@@ -32,6 +32,8 @@ prevent-hotbar-switch: true
 prevent-commands: true
 prevent-crafting: true
 prevent-inventory-interaction: true
+prevent-inventory-open: true #idk why blocking interact doesn't block this but here we are
+prevent-attacking: true
 whitelisted-commands:
 # !! NOTE !! If you do not have the minecraft commands blocked by permissions, it is strongly advised
 # Not to remove these from the whitelist due to chat signatures - if these commands are cancelled,

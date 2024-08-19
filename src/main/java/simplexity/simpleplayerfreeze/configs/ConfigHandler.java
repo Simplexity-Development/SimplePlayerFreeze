@@ -13,7 +13,7 @@ public class ConfigHandler {
     private String placeholderAPIFormat;
     private boolean freezePersist, freezeGlow, freezeDismount, freezeFlight, freezeInvulnerability, preventMovement,
             preventInteract, preventCrafting, preventXPPickup, preventItemPickup, preventItemDrop, preventItemUse,
-            preventHotbarSwitch, preventInventoryInteraction, preventWalking, preventCommands, consoleSeesMutedMessages,
+            preventHotbarSwitch, preventInventoryInteraction, preventInventoryOpen, preventWalking, preventCommands, preventAttack, consoleSeesMutedMessages,
             consoleFreezeLoginNotified, preventJumping;
     public static int chatBehavior;
     public static ArrayList<String> whitelistedCommandList = new ArrayList<>();
@@ -59,7 +59,9 @@ public class ConfigHandler {
         preventItemUse = config.getBoolean("prevent-item-use", true);
         preventHotbarSwitch = config.getBoolean("prevent-hotbar-switch", true);
         preventCommands = config.getBoolean("prevent-commands", true);
+        preventAttack = config.getBoolean("prevent-attack", true);
         preventInventoryInteraction = config.getBoolean("prevent-inventory-interaction", true);
+        preventInventoryOpen = config.getBoolean("prevent-inventory-open", true);
         consoleSeesMutedMessages = config.getBoolean("console-sees-muted-messages", true);
         consoleFreezeLoginNotified = config.getBoolean("console-freeze-login-notified", true);
     }
@@ -162,5 +164,13 @@ public class ConfigHandler {
 
     public boolean shouldPreventJumping() {
         return preventJumping;
+    }
+
+    public boolean shouldPreventAttack() {
+        return preventAttack;
+    }
+
+    public boolean shouldPreventInventoryOpen() {
+        return preventInventoryOpen;
     }
 }
