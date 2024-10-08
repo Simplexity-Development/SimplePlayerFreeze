@@ -52,6 +52,8 @@ console-sees-muted-messages: true
 console-freeze-login-notified: true
 # Which things should be prevented when someone is frozen?
 prevent-movement: true
+prevent-walking: true
+prevent-jumping: true
 prevent-interact: true
 prevent-xp-pickup: true
 prevent-item-pickup: true
@@ -60,10 +62,13 @@ prevent-item-use: true
 prevent-hotbar-switch: true
 prevent-commands: true
 prevent-crafting: true
+prevent-inventory-interaction: true
+prevent-inventory-open: true #idk why blocking interact doesn't block this but here we are
+prevent-attacking: true
 whitelisted-commands:
-  # !! NOTE !! If you do not have the minecraft commands blocked by permissions, it is strongly advised
-  # Not to remove these from the whitelist due to chat signatures - if these commands are cancelled,
-  # The player will be kicked for a missing public key.
+# !! NOTE !! If you do not have the minecraft commands blocked by permissions, it is strongly advised
+# Not to remove these from the whitelist due to chat signatures - if these commands are cancelled,
+# The player will be kicked for a missing public key.
   - /minecraft:msg
   - /minecraft:w
   - /minecraft:t
@@ -76,6 +81,10 @@ whitelisted-commands:
   - /tm
   - /r
 placeholder-api-format: "<dark_gray>[Frozen]</dark_gray>"
+```
+
+### Locale
+```yml
 #-------------------- [Locale] --------------------
 prefix: "<green><bold>[</bold><yellow>SPF</yellow><bold>]</bold></green> "
 no-permission: "<red>You do not have permission to run this command!</red>"
