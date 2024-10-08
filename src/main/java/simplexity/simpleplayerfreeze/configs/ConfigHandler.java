@@ -9,12 +9,11 @@ import java.util.List;
 public class ConfigHandler {
 
     private static ConfigHandler instance;
-    private String prefix = "";
     private String placeholderAPIFormat;
     private boolean freezePersist, freezeGlow, freezeDismount, freezeFlight, freezeInvulnerability, preventMovement,
             preventInteract, preventCrafting, preventXPPickup, preventItemPickup, preventItemDrop, preventItemUse,
             preventHotbarSwitch, preventInventoryInteraction, preventInventoryOpen, preventWalking, preventCommands, preventAttack, consoleSeesMutedMessages,
-            consoleFreezeLoginNotified, preventJumping;
+            consoleFreezeLoginNotified, preventJumping, freezeNewLogins, freezeWorldChange, notifyWorldChange, notifyNewLogins;
     public static int chatBehavior;
     public static ArrayList<String> whitelistedCommandList = new ArrayList<>();
 
@@ -64,6 +63,10 @@ public class ConfigHandler {
         preventInventoryOpen = config.getBoolean("prevent-inventory-open", true);
         consoleSeesMutedMessages = config.getBoolean("console-sees-muted-messages", true);
         consoleFreezeLoginNotified = config.getBoolean("console-freeze-login-notified", true);
+        freezeNewLogins = config.getBoolean("freeze-new-logins", true);
+        freezeWorldChange = config.getBoolean("freeze-world-change", true);
+        notifyWorldChange = config.getBoolean("notify-world-change", true);
+        notifyNewLogins = config.getBoolean("notify-new-logins", true);
     }
 
     private static void reloadConfigCommands() {
@@ -158,10 +161,6 @@ public class ConfigHandler {
         return placeholderAPIFormat;
     }
 
-    public String getPrefix() {
-        return prefix;
-    }
-
     public boolean shouldPreventJumping() {
         return preventJumping;
     }
@@ -172,5 +171,21 @@ public class ConfigHandler {
 
     public boolean shouldPreventInventoryOpen() {
         return preventInventoryOpen;
+    }
+
+    public boolean shouldFreezeNewLogins() {
+        return freezeNewLogins;
+    }
+
+    public boolean shouldFreezeWorldChange() {
+        return freezeWorldChange;
+    }
+
+    public boolean shouldNotifyWorldChange() {
+        return notifyWorldChange;
+    }
+
+    public boolean shouldNotifyNewLogins() {
+        return notifyNewLogins;
     }
 }

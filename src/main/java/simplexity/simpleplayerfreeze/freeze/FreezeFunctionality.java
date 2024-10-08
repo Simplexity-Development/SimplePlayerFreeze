@@ -1,5 +1,6 @@
 package simplexity.simpleplayerfreeze.freeze;
 
+import org.bukkit.GameMode;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
 import org.bukkit.persistence.PersistentDataType;
@@ -12,6 +13,7 @@ import java.util.Objects;
 public class FreezeFunctionality {
 
     public static void setFrozen(Player player) {
+        if (player.hasPermission(Util.freezeBypassPermission)) return;
         player.getPersistentDataContainer().set(Util.isFrozenKey, PersistentDataType.BOOLEAN, true);
         if (ConfigHandler.getInstance().shouldFreezeFlight()) {
             enableFlight(player);
@@ -55,7 +57,7 @@ public class FreezeFunctionality {
     }
 
     public static void removeFlight(Player player) {
-        if (!player.getPersistentDataContainer().getOrDefault(Util.previouslyHadFlyPerms, PersistentDataType.BOOLEAN, false)) {
+        if (!player.getPersistentDataContainer().getOrDefault(Util.previouslyHadFlyPerms, PersistentDataType.BOOLEAN, false) && !player.getGameMode().equals(GameMode.CREATIVE)) {
             player.setAllowFlight(false);
         }
         player.getPersistentDataContainer().remove(Util.previouslyHadFlyPerms);

@@ -15,10 +15,11 @@ public class LocaleHandler {
     private final File localeFile = new File(SimplePlayerFreeze.getInstance().getDataFolder(), fileName);
     private final FileConfiguration localeConfig = new YamlConfiguration();
     private final Logger logger = SimplePlayerFreeze.getInstance().getLogger();
-    private String prefix, cannotChat, cannotUseCommand, freezeMessage, unfreezeMessage,
+    private String prefix, cannotChat, cannotUseCommand, freezeMessage, unfreezeMessage, freezeServerMessage, freezeWorldMessage,
             reloadMessage, haveBeenFrozen, haveBeenUnfrozen, noPermission, noPlayer, loginMessage, loginNotif,
             loginNotifNowUnfrozen, loginNotifConsole, loginNotifConsoleUnfreezing, cannotBeFrozen, notFrozen, shadowMuteFormat,
-            freezeSpyEnabled, freezeSpyDisabled, onlyPlayer;
+            freezeSpyEnabled, freezeSpyDisabled, onlyPlayer, freezeWorldChange, loginNotifServerFrozen, tooManyArgs, worldNotFound,
+            unfreezeWorldMessage, unfreezeServerMessage;
 
 
     private LocaleHandler() {
@@ -47,6 +48,8 @@ public class LocaleHandler {
         cannotChat = localeConfig.getString("cannot-chat", "You are frozen and cannot chat");
         cannotUseCommand = localeConfig.getString("cannot-use-command", "You are frozen and cannot use that command");
         freezeMessage = localeConfig.getString("freeze-message", "<green><name></green> <aqua>has been frozen</aqua>");
+        freezeServerMessage = localeConfig.getString("freeze-server-message", "<aqua>The server has been frozen</aqua>");
+        freezeWorldMessage = localeConfig.getString("freeze-world-message", "<aqua>The <green><name></green> world has been frozen<aqua>");
         unfreezeMessage = localeConfig.getString("unfreeze-message", "<green><name></green> <yellow>has been unfrozen</yellow>");
         reloadMessage = localeConfig.getString("reload-message", "<gold>The Simple Player Freeze config has been reloaded</gold>");
         haveBeenFrozen = localeConfig.getString("have-been-frozen", "<red><bold>[NOTICE]</bold></red> <gray>You have been frozen. You cannot move, interact, or chat");
@@ -64,7 +67,14 @@ public class LocaleHandler {
         freezeSpyEnabled = localeConfig.getString("freeze-spy-enabled", "<green>Freeze Spy has been toggled <bold><yellow>On</yellow></bold>!</green>");
         freezeSpyDisabled = localeConfig.getString("freeze-spy-disabled", "<grey>Freeze Spy has been toggled <bold><red>Off</red></bold>!</grey>");
         onlyPlayer = localeConfig.getString("only-player", "<red>Sorry! Only a player can run that command</red>");
+        freezeWorldChange = localeConfig.getString("freeze-world-change", "<dark_gray><bold><name></bold></dark_gray> <gray>has switched to <world>. Since that world is frozen, they will now be frozen");
+        loginNotifServerFrozen = localeConfig.getString("login-notif-server-frozen", "<dark_gray><bold><name></bold></dark_gray> <gray>has logged in. Since the server is currently frozen, they will now be frozen");
+        worldNotFound = localeConfig.getString("world-not-found", "<red>The world <yellow><name></yellow> could not be found. Please check your spelling and try again</red>");
+        tooManyArgs = localeConfig.getString("too-many-strings", "<red>You have provided too many arguments, please check your syntax and try again</red>");
+        unfreezeWorldMessage = localeConfig.getString("unfreeze-world-message", "<yellow>The <green><world></green> world has been unfrozen</yellow>");
+        unfreezeServerMessage = localeConfig.getString("unfreeze-server-message", "<yellow>The server has been frozen</yellow>");
     }
+
 
     public String getCannotChat() {
         return cannotChat;
@@ -148,5 +158,37 @@ public class LocaleHandler {
 
     public String getPrefix() {
         return prefix;
+    }
+
+    public String getFreezeServerMessage() {
+        return freezeServerMessage;
+    }
+
+    public String getFreezeWorldMessage() {
+        return freezeWorldMessage;
+    }
+
+    public String getFreezeWorldChange() {
+        return freezeWorldChange;
+    }
+
+    public String getLoginNotifServerFrozen() {
+        return loginNotifServerFrozen;
+    }
+
+    public String getTooManyArgs() {
+        return tooManyArgs;
+    }
+
+    public String getWorldNotFound() {
+        return worldNotFound;
+    }
+
+    public String getUnfreezeWorldMessage() {
+        return unfreezeWorldMessage;
+    }
+
+    public String getUnfreezeServerMessage() {
+        return unfreezeServerMessage;
     }
 }

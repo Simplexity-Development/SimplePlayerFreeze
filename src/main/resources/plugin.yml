@@ -26,6 +26,32 @@ permissions:
   spf.chatspy:
     description: 'Allows this player to to see muted messages from frozen players'
     default: op
+  spf.freezeall:
+    description: 'Allows this player to use the /freezeall command'
+    default: op
+  spf.freezeall.server:
+    description: 'Allows this player to freeze all the players in the server'
+    default: op
+    children:
+      spf.freezeall: true
+  spf.freezeall.world:
+    description: 'Allows this player to freeze all the players in a specific world'
+    default: op
+    children:
+      spf.freezeall: true
+  spf.unfreezeall:
+    description: 'Allows this player to use the /unfreezeall command'
+    default: op
+  spf.unfreezeall.server:
+    description: 'Allows this player to freeze all players in the server'
+    default: op
+    children:
+      spf.unfreezeall: true
+  spf.unfreezeall.world:
+    description: 'Allows this player to freeze all players in a specific world'
+    default: op
+    children:
+      spf.unfreezeall: true
 commands:
   freeze:
     permission: 'spf.freeze'
@@ -35,6 +61,14 @@ commands:
     permission: 'spf.unfreeze'
     description: 'Unfreeze a frozen player'
     usage: '/unfreeze <player>'
+  freezeall:
+    permission: 'spf.freezeall'
+    description: 'Freeze all the players in a server or world'
+    usage: '/freezeall [worldname]'
+  unfreezeall:
+    permission: 'spf.unfreezeall'
+    description: 'Unfreeze all players in a server or world'
+    usage: '/unfreezeall [worldname]'
   freezespy:
     permission: 'spf.chatspy'
     description: "Toggle personal visibility for frozen player's messages"

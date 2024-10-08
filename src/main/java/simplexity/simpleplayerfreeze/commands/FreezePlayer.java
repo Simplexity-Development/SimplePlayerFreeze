@@ -6,14 +6,15 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
+import simplexity.simpleplayerfreeze.SimplePlayerFreeze;
 import simplexity.simpleplayerfreeze.Util;
 import simplexity.simpleplayerfreeze.configs.LocaleHandler;
-import simplexity.simpleplayerfreeze.freeze.FreezeFunctionality;
+import simplexity.simpleplayerfreeze.events.PlayerFreezeEvent;
 
 public class FreezePlayer implements CommandExecutor {
-    
+
     // Freezes the player, or unfreezes the player if they are already frozen.
-    
+
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
         if (!sender.hasPermission(Util.freezePermission)) {
             Util.sendErrorMessage(sender, LocaleHandler.getInstance().getNoPermission());
@@ -28,18 +29,19 @@ public class FreezePlayer implements CommandExecutor {
         if (player == null) {
             Util.sendErrorMessage(sender, LocaleHandler.getInstance().getNoPermission());
             return false;
-        } else if (player.hasPermission(Util.freezeBypassPermission)) {
-            Util.sendErrorMessage( sender, LocaleHandler.getInstance().getCannotBeFrozen());
+        }
+        if (player.hasPermission(Util.freezeBypassPermission)) {
+            Util.sendErrorMessage(sender, LocaleHandler.getInstance().getCannotBeFrozen());
             return false;
-        } else if (Util.isFrozen(player) && sender.hasPermission(Util.unfreezePermission)) {
-            FreezeFunctionality.setUnfrozen(player);
+        }
+        if (Util.isFrozen(player)) {
+            SimplePlayerFreeze.getInstance().getServer().getPluginManager().callEvent(new PlayerFreezeEvent(player, false));
             Util.sendUserMessageWithPlayer(sender, LocaleHandler.getInstance().getUnfreezeMessage(), player);
-            return true;
         } else {
-            FreezeFunctionality.setFrozen(player);
+            SimplePlayerFreeze.getInstance().getServer().getPluginManager().callEvent(new PlayerFreezeEvent(player, true));
             Util.sendUserMessageWithPlayer(sender, LocaleHandler.getInstance().getFreezeMessage(), player);
         }
         return true;
     }
-    
 }
+
