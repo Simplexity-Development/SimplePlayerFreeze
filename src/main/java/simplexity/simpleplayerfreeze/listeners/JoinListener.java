@@ -9,6 +9,7 @@ import simplexity.simpleplayerfreeze.Util;
 import simplexity.simpleplayerfreeze.configs.ConfigHandler;
 import simplexity.simpleplayerfreeze.configs.LocaleHandler;
 import simplexity.simpleplayerfreeze.events.PlayerFreezeEvent;
+import simplexity.simpleplayerfreeze.freeze.FreezeType;
 
 import java.util.ArrayList;
 
@@ -26,33 +27,60 @@ public class JoinListener implements Listener {
         if (player.hasPermission(Util.freezeChatSpy)) {
             spyList.add(player);
         }
-        // This is gonna get annoying to look at soon
-        if (Util.isServerFrozen() && !player.hasPermission(Util.freezeBypassPermission) && ConfigHandler.getInstance().shouldFreezeNewLogins()) {
-            SimplePlayerFreeze.getInstance().getServer().getPluginManager().callEvent(new PlayerFreezeEvent(player, true));
-            if (!ConfigHandler.getInstance().shouldNotifyNewLogins()) return;
-            for (Player playerNotif : notifyList) {
-                Util.sendUserMessageWithPlayer(playerNotif, LocaleHandler.getInstance().getLoginNotifServerFrozen(), player);
-            }
-
+        if (player.hasPermission(Util.freezeBypassPermission)) {
+            return;
         }
-        if (Util.isFrozen(player)) {
-            SimplePlayerFreeze.getInstance().getServer().getPluginManager().callEvent(new PlayerFreezeEvent(player, false));
-            for (Player playerNotif : notifyList) {
-                Util.sendUserMessageWithPlayer(playerNotif, LocaleHandler.getInstance().getLoginNotifNowUnfrozen(), player);
-            }
-            Util.sendUserMessageWithPlayer(SimplePlayerFreeze.getSFConsoleSender(),
-                    LocaleHandler.getInstance().getLoginNotifConsoleUnfreezing(), player);
+        // This is gonna get annoying to look at soon
+        if (Util.isServerFrozen()) {
+            if (!ConfigHandler.getInstance().shouldFreezeNewLogins()) return;
+            freezePlayer(joinEvent, FreezeType.SERVER);
+            sendMessages(player, LocaleHandler.getInstance().getLoginNotifServerFrozen());
+            return;
+        }
+        Boolean worldFrozen = Util.worldFrozen.get(player.getWorld());
+        if (worldFrozen != null && worldFrozen) {
+            if (!ConfigHandler.getInstance().shouldFreezeNewLogins()) return;
+            freezePlayer(joinEvent, FreezeType.WORLD);
+            sendMessages(player, LocaleHandler.getInstance().getFreezeWorldChange());
+            return;
+        }
+        if (Util.isFrozen(player) && !ConfigHandler.getInstance().shouldFreezePersist()) {
+            unfreezePlayer(joinEvent);
+            sendMessages(player, LocaleHandler.getInstance().getLoginNotifNowUnfrozen());
             return;
         }
         if (Util.isFrozen(player) && ConfigHandler.getInstance().shouldFreezePersist()) {
-            SimplePlayerFreeze.getInstance().getServer().getPluginManager().callEvent(new PlayerFreezeEvent(player, true));
-            for (Player playerNotif : notifyList) {
-                Util.sendUserMessageWithPlayer(playerNotif, LocaleHandler.getInstance().getLoginNotif(), player);
+            FreezeType freezeType = Util.getFreezeType(player);
+            if (freezeType != FreezeType.INDIVIDUAL) {
+                unfreezePlayer(joinEvent);
+                sendMessages(player, LocaleHandler.getInstance().getLoginNotifNowUnfrozen());
+                return;
             }
-            Util.sendUserMessageWithPlayer(SimplePlayerFreeze.getSFConsoleSender(),
-                    LocaleHandler.getInstance().getLoginNotifConsole(), player);
+            freezePlayer(joinEvent, FreezeType.INDIVIDUAL);
+            sendMessages(player, LocaleHandler.getInstance().getLoginNotif());
+
         }
 
+    }
+
+    private void freezePlayer(PlayerJoinEvent joinEvent, FreezeType freezeType) {
+        if (!ConfigHandler.getInstance().shouldFreezeNewLogins()) return;
+        Player player = joinEvent.getPlayer();
+        SimplePlayerFreeze.getInstance().getServer().getPluginManager().callEvent(new PlayerFreezeEvent(player, true, freezeType));
+    }
+
+    private void unfreezePlayer(PlayerJoinEvent joinEvent){
+        Player player = joinEvent.getPlayer();
+        SimplePlayerFreeze.getInstance().getServer().getPluginManager().callEvent(new PlayerFreezeEvent(player, false, FreezeType.NONE));
+    }
+
+    private void sendMessages(Player player, String message) {
+        for (Player playerNotif : notifyList) {
+            Util.sendUserMessageWithPlayer(playerNotif, message, player);
+        }
+        if (ConfigHandler.getInstance().shouldConsoleBeNotified()) {
+            Util.sendUserMessageWithPlayer(SimplePlayerFreeze.getSFConsoleSender(), message, player);
+        }
     }
 
 }

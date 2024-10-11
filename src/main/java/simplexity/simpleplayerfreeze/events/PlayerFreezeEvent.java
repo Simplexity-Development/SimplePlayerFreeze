@@ -4,6 +4,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 import org.jetbrains.annotations.NotNull;
+import simplexity.simpleplayerfreeze.freeze.FreezeType;
 
 /**
  * Called when a player should be frozen or unfrozen
@@ -12,10 +13,12 @@ public class PlayerFreezeEvent extends Event {
     private static final HandlerList handlers = new HandlerList();
     private final Player player;
     private final boolean frozen;
+    private final FreezeType type;
 
-    public PlayerFreezeEvent(Player player, final boolean frozen) {
+    public PlayerFreezeEvent(Player player, final boolean frozen, FreezeType type) {
         this.player = player;
         this.frozen = frozen;
+        this.type = type;
     }
 
     @Override
@@ -44,5 +47,9 @@ public class PlayerFreezeEvent extends Event {
      */
     public static HandlerList getHandlerList() {
         return handlers;
+    }
+
+    public FreezeType getType() {
+        return type;
     }
 }

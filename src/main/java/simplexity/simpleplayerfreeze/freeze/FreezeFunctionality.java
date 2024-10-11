@@ -12,9 +12,12 @@ import java.util.Objects;
 
 public class FreezeFunctionality {
 
-    public static void setFrozen(Player player) {
+    public static void setFrozen(Player player, FreezeType freezeType) {
         if (player.hasPermission(Util.freezeBypassPermission)) return;
+        // set frozen and type in PDC
         player.getPersistentDataContainer().set(Util.isFrozenKey, PersistentDataType.BOOLEAN, true);
+        player.getPersistentDataContainer().set(Util.freezeTypeKey, PersistentDataType.STRING, freezeType.name());
+        // Set configured effects
         if (ConfigHandler.getInstance().shouldFreezeFlight()) {
             enableFlight(player);
         }
@@ -37,7 +40,10 @@ public class FreezeFunctionality {
     }
 
     public static void setUnfrozen(Player player) {
+        // Disable frozen tag and set freeze type to default
         player.getPersistentDataContainer().set(Util.isFrozenKey, PersistentDataType.BOOLEAN, false);
+        player.getPersistentDataContainer().set(Util.freezeTypeKey, PersistentDataType.STRING,  FreezeType.NONE.name());
+        // revert effects
         removeFlight(player);
         player.setInvulnerable(false);
         player.setGlowing(false);

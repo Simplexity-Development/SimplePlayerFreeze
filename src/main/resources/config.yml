@@ -17,8 +17,8 @@ freeze-invulnerability: true
 chat-behavior: 2
 # Should console spy on attempted messages in chat behavior 2?
 console-sees-muted-messages: true
-# Should console be notified when someone who is frozen logs in?
-console-freeze-login-notified: true
+# Should console receive the same notifications that those with the 'spf.notify' permission do?
+console-notify: true
 # Which things should be prevented when someone is frozen?
 prevent-movement: true
 prevent-walking: true
@@ -35,10 +35,8 @@ prevent-inventory-interaction: true
 prevent-inventory-open: true #idk why blocking interact doesn't block this but here we are
 prevent-attacking: true
 # Configurations for the /freezeall command
-freeze-new-logins: true # if the server is frozen, should people who log in while it's frozen, also be frozen?
+freeze-new-logins: true # if the server or world is frozen, should people who log in while it's frozen, also be frozen?
 freeze-world-change: true # if teleporting into a frozen world should the person be frozen
-notify-world-change: true # notify when someone teleports into a frozen world and is frozen
-notify-new-logins: true # if the server is frozen, should staff be notified that someone has been frozen when they've logged in?
 whitelisted-commands:
 # !! NOTE !! If you do not have the minecraft commands blocked by permissions, it is strongly advised
 # Not to remove these from the whitelist due to chat signatures - if these commands are cancelled,

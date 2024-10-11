@@ -11,7 +11,7 @@ public class FreezeListener implements Listener {
     public void onPlayerFreeze(PlayerFreezeEvent freezeEvent) {
         Player player = freezeEvent.getPlayer();
         if (freezeEvent.setFrozen()) {
-            FreezeFunctionality.setFrozen(player);
+            FreezeFunctionality.setFrozen(player, freezeEvent.getType());
         } else {
             FreezeFunctionality.setUnfrozen(player);
         }

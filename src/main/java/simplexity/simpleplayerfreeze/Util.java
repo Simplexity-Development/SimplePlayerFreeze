@@ -8,9 +8,10 @@ import org.bukkit.World;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.permissions.Permission;
+import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
-import simplexity.simpleplayerfreeze.configs.ConfigHandler;
 import simplexity.simpleplayerfreeze.configs.LocaleHandler;
+import simplexity.simpleplayerfreeze.freeze.FreezeType;
 
 import java.util.HashMap;
 
@@ -19,6 +20,7 @@ public class Util {
     public static MiniMessage miniMessage = MiniMessage.miniMessage();
     public static String namespace = "simpleplayerfreeze";
     public static NamespacedKey isFrozenKey = new NamespacedKey(namespace, "isfrozen");
+    public static NamespacedKey freezeTypeKey = new NamespacedKey(namespace, "freezetype");
     public static NamespacedKey previouslyHadFlyPerms = new NamespacedKey(namespace, "previousflyperms");
     public static NamespacedKey freezeSpyDisabled = new NamespacedKey(namespace, "freezespy");
     public static Permission freezePermission = new Permission("spf.freeze");
@@ -60,7 +62,7 @@ public class Util {
     public static void sendUserMessageWithWorld(CommandSender sender, String message, World world) {
         if (message.isEmpty()) return;
         String worldName = world.getName();
-        sender.sendMessage(miniMessage.deserialize(LocaleHandler.getInstance().getPrefix(),
+        sender.sendMessage(miniMessage.deserialize(LocaleHandler.getInstance().getPrefix() + message,
                 Placeholder.unparsed("world", worldName)));
     }
 
@@ -74,6 +76,12 @@ public class Util {
 
     public static boolean isFrozen(Player player) {
         return player.getPersistentDataContainer().getOrDefault(isFrozenKey, PersistentDataType.BOOLEAN, false);
+    }
+
+    public static FreezeType getFreezeType(Player player){
+        PersistentDataContainer container = player.getPersistentDataContainer();
+        String freezeTypeString = container.getOrDefault(freezeTypeKey, PersistentDataType.STRING, FreezeType.NONE.name());
+        return FreezeType.valueOf(freezeTypeString);
     }
 
     public static void setServerFrozen(boolean frozen) {

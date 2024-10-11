@@ -11,6 +11,7 @@ import simplexity.simpleplayerfreeze.SimplePlayerFreeze;
 import simplexity.simpleplayerfreeze.Util;
 import simplexity.simpleplayerfreeze.configs.LocaleHandler;
 import simplexity.simpleplayerfreeze.events.PlayerFreezeEvent;
+import simplexity.simpleplayerfreeze.freeze.FreezeType;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -22,7 +23,7 @@ public class UnfreezeAll implements TabExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String s, @NotNull String[] args) {
         if (unfreezeWorld(sender, args)) return true;
-        freezeServer(sender);
+        unfreezeServer(sender);
         return true;
     }
 
@@ -53,21 +54,25 @@ public class UnfreezeAll implements TabExecutor {
         }
         List<Player> players = requestedWorld.getPlayers();
         for (Player player : players) {
-            SimplePlayerFreeze.getInstance().getServer().getPluginManager().callEvent(new PlayerFreezeEvent(player, false));
+            if (!Util.isFrozen(player)) continue;
+            if (Util.getFreezeType(player) == FreezeType.INDIVIDUAL) continue;
+            SimplePlayerFreeze.getInstance().getServer().getPluginManager().callEvent(new PlayerFreezeEvent(player, false, FreezeType.NONE));
         }
         Util.worldFrozen.remove(requestedWorld);
         Util.sendUserMessageWithWorld(sender, LocaleHandler.getInstance().getUnfreezeWorldMessage(), requestedWorld);
         return true;
     }
 
-    public void freezeServer(CommandSender sender) {
+    public void unfreezeServer(CommandSender sender) {
         if (!sender.hasPermission(Util.freezeServerPermission)) {
             Util.sendErrorMessage(sender, LocaleHandler.getInstance().getNoPermission());
             return;
         }
         Collection<? extends Player> players = SimplePlayerFreeze.server.getOnlinePlayers();
         for (Player player : players) {
-            SimplePlayerFreeze.getInstance().getServer().getPluginManager().callEvent(new PlayerFreezeEvent(player, false));
+            if (!Util.isFrozen(player)) continue;
+            if (Util.getFreezeType(player) == FreezeType.INDIVIDUAL) continue;
+            SimplePlayerFreeze.getInstance().getServer().getPluginManager().callEvent(new PlayerFreezeEvent(player, false, FreezeType.NONE));
         }
         Util.setServerFrozen(false);
         Util.sendUserMessage(sender, LocaleHandler.getInstance().getUnfreezeServerMessage());

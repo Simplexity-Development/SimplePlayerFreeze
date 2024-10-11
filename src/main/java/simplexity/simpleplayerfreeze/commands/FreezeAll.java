@@ -11,6 +11,7 @@ import simplexity.simpleplayerfreeze.SimplePlayerFreeze;
 import simplexity.simpleplayerfreeze.Util;
 import simplexity.simpleplayerfreeze.configs.LocaleHandler;
 import simplexity.simpleplayerfreeze.events.PlayerFreezeEvent;
+import simplexity.simpleplayerfreeze.freeze.FreezeType;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -54,7 +55,8 @@ public class FreezeAll implements TabExecutor {
         }
         List<Player> players = requestedWorld.getPlayers();
         for (Player player : players) {
-            SimplePlayerFreeze.getInstance().getServer().getPluginManager().callEvent(new PlayerFreezeEvent(player, true));
+            if (Util.isFrozen(player)) continue;
+            SimplePlayerFreeze.getInstance().getServer().getPluginManager().callEvent(new PlayerFreezeEvent(player, true, FreezeType.WORLD));
         }
         Util.worldFrozen.put(requestedWorld, true);
         Util.sendUserMessageWithWorld(sender, LocaleHandler.getInstance().getFreezeWorldMessage(), requestedWorld);
@@ -68,7 +70,8 @@ public class FreezeAll implements TabExecutor {
         }
         Collection<? extends Player> players = SimplePlayerFreeze.server.getOnlinePlayers();
         for (Player player : players) {
-            SimplePlayerFreeze.getInstance().getServer().getPluginManager().callEvent(new PlayerFreezeEvent(player, true));
+            if (Util.isFrozen(player)) continue;
+            SimplePlayerFreeze.getInstance().getServer().getPluginManager().callEvent(new PlayerFreezeEvent(player, true, FreezeType.SERVER));
         }
         Util.setServerFrozen(true);
         Util.sendUserMessage(sender, LocaleHandler.getInstance().getFreezeServerMessage());

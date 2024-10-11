@@ -13,7 +13,7 @@ public class ConfigHandler {
     private boolean freezePersist, freezeGlow, freezeDismount, freezeFlight, freezeInvulnerability, preventMovement,
             preventInteract, preventCrafting, preventXPPickup, preventItemPickup, preventItemDrop, preventItemUse,
             preventHotbarSwitch, preventInventoryInteraction, preventInventoryOpen, preventWalking, preventCommands, preventAttack, consoleSeesMutedMessages,
-            consoleFreezeLoginNotified, preventJumping, freezeNewLogins, freezeWorldChange, notifyWorldChange, notifyNewLogins;
+            consoleNotify, preventJumping, freezeNewLogins, freezeWorldChange;
     public static int chatBehavior;
     public static ArrayList<String> whitelistedCommandList = new ArrayList<>();
 
@@ -62,11 +62,9 @@ public class ConfigHandler {
         preventInventoryInteraction = config.getBoolean("prevent-inventory-interaction", true);
         preventInventoryOpen = config.getBoolean("prevent-inventory-open", true);
         consoleSeesMutedMessages = config.getBoolean("console-sees-muted-messages", true);
-        consoleFreezeLoginNotified = config.getBoolean("console-freeze-login-notified", true);
+        consoleNotify = config.getBoolean("console-notify", true);
         freezeNewLogins = config.getBoolean("freeze-new-logins", true);
         freezeWorldChange = config.getBoolean("freeze-world-change", true);
-        notifyWorldChange = config.getBoolean("notify-world-change", true);
-        notifyNewLogins = config.getBoolean("notify-new-logins", true);
     }
 
     private static void reloadConfigCommands() {
@@ -153,8 +151,8 @@ public class ConfigHandler {
         return consoleSeesMutedMessages;
     }
 
-    public boolean shouldConsoleFreezeLoginNotified() {
-        return consoleFreezeLoginNotified;
+    public boolean shouldConsoleBeNotified() {
+        return consoleNotify;
     }
 
     public String getPlaceholderAPIFormat() {
@@ -181,11 +179,4 @@ public class ConfigHandler {
         return freezeWorldChange;
     }
 
-    public boolean shouldNotifyWorldChange() {
-        return notifyWorldChange;
-    }
-
-    public boolean shouldNotifyNewLogins() {
-        return notifyNewLogins;
-    }
 }
