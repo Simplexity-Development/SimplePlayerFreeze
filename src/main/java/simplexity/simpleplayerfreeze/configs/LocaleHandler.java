@@ -17,8 +17,8 @@ public class LocaleHandler {
     private final Logger logger = SimplePlayerFreeze.getInstance().getLogger();
     private String prefix, cannotChat, cannotUseCommand, freezeMessage, unfreezeMessage, freezeServerMessage, freezeWorldMessage,
             reloadMessage, haveBeenFrozen, haveBeenUnfrozen, noPermission, noPlayer, loginMessage, loginNotif,
-            loginNotifNowUnfrozen, loginNotifConsole, loginNotifConsoleUnfreezing, cannotBeFrozen, notFrozen, shadowMuteFormat,
-            freezeSpyEnabled, freezeSpyDisabled, onlyPlayer, freezeWorldChange, loginNotifServerFrozen, tooManyArgs, worldNotFound,
+            loginNotifNowUnfrozen, cannotBeFrozen, notFrozen, shadowMuteFormat,
+            freezeSpyEnabled, freezeSpyDisabled, onlyPlayer, freezeWorldChange, loginNotifServerFrozen, worldNotFound,
             unfreezeWorldMessage, unfreezeServerMessage;
 
 
@@ -59,8 +59,6 @@ public class LocaleHandler {
         loginMessage = localeConfig.getString("login-message", "<red><bold>[NOTICE]</bold></red> <gray>You were frozen during a previous session. You cannot move, interact, or chat");
         loginNotif = localeConfig.getString("login-notif", "<dark_gray><bold><name></bold></dark_gray> <gray>has logged in. They were frozen during a previous session.");
         loginNotifNowUnfrozen = localeConfig.getString("login-notif-now-unfrozen", "<dark_gray><bold><name></bold></dark_gray> <gray>has logged in. They were frozen during a previous session. They will now be unfrozen.");
-        loginNotifConsole = localeConfig.getString("login-notif-console", "[Simple Freeze] <name> logged in while frozen");
-        loginNotifConsoleUnfreezing = localeConfig.getString("login-notif-console-unfreezing", "[Simple Freeze] <name> logged in while frozen- unfreezing.");
         cannotBeFrozen = localeConfig.getString("cannot-be-frozen", "<red>That player cannot be frozen!</red>");
         notFrozen = localeConfig.getString("not-frozen", "<red>That player is not frozen!</red>");
         shadowMuteFormat = localeConfig.getString("shadow-mute-format", "<dark_gray>[Frozen]</dark_gray> <gray><player>: <message></gray>");
@@ -70,7 +68,6 @@ public class LocaleHandler {
         freezeWorldChange = localeConfig.getString("freeze-world-change", "<dark_gray><bold><name></bold></dark_gray> <gray>has switched to <world>. Since that world is frozen, they will now be frozen");
         loginNotifServerFrozen = localeConfig.getString("login-notif-server-frozen", "<dark_gray><bold><name></bold></dark_gray> <gray>has logged in. Since the server is currently frozen, they will now be frozen");
         worldNotFound = localeConfig.getString("world-not-found", "<red>The world <yellow><name></yellow> could not be found. Please check your spelling and try again</red>");
-        tooManyArgs = localeConfig.getString("too-many-strings", "<red>You have provided too many arguments, please check your syntax and try again</red>");
         unfreezeWorldMessage = localeConfig.getString("unfreeze-world-message", "<yellow>The <green><world></green> world has been unfrozen</yellow>");
         unfreezeServerMessage = localeConfig.getString("unfreeze-server-message", "<yellow>The server has been frozen</yellow>");
     }
@@ -124,14 +121,6 @@ public class LocaleHandler {
         return loginNotifNowUnfrozen;
     }
 
-    public String getLoginNotifConsole() {
-        return loginNotifConsole;
-    }
-
-    public String getLoginNotifConsoleUnfreezing() {
-        return loginNotifConsoleUnfreezing;
-    }
-
     public String getCannotBeFrozen() {
         return cannotBeFrozen;
     }
@@ -174,10 +163,6 @@ public class LocaleHandler {
 
     public String getLoginNotifServerFrozen() {
         return loginNotifServerFrozen;
-    }
-
-    public String getTooManyArgs() {
-        return tooManyArgs;
     }
 
     public String getWorldNotFound() {

@@ -29,9 +29,10 @@ public class Util {
     public static Permission freezeNotify = new Permission("spf.notify");
     public static Permission freezeChatSpy = new Permission("spf.chatspy");
     public static Permission reloadPermission = new Permission("spf.reload");
-    public static Permission freezeAllPermission = new Permission("spf.freezeall");
     public static Permission freezeWorldPermission = new Permission("spf.freezeall.world");
     public static Permission freezeServerPermission = new Permission("spf.freezeall.server");
+    public static Permission unfreezeWorldPermission = new Permission("spf.unfreezeall.world");
+    public static Permission unfreezeServerPermission = new Permission("spf.unfreezeall.server");
     public static HashMap<World, Boolean> worldFrozen = new HashMap<>();
     public static boolean serverFrozen = false;
 

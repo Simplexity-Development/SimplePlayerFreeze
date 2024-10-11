@@ -30,7 +30,7 @@ public class UnfreezeAll implements TabExecutor {
     @Override
     public @Nullable List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
         tabComplete.clear();
-        if (!sender.hasPermission(Util.freezeWorldPermission)) {
+        if (!sender.hasPermission(Util.unfreezeWorldPermission)) {
             return List.of("");
         }
         for (World world : Util.worldFrozen.keySet()) {
@@ -42,7 +42,7 @@ public class UnfreezeAll implements TabExecutor {
     public boolean unfreezeWorld(CommandSender sender, String[] args) {
         String worldName;
         if (args.length == 0) return false;
-        if (!sender.hasPermission(Util.freezeWorldPermission)) {
+        if (!sender.hasPermission(Util.unfreezeWorldPermission)) {
             Util.sendErrorMessage(sender, LocaleHandler.getInstance().getNoPermission());
             return false;
         }
@@ -64,7 +64,7 @@ public class UnfreezeAll implements TabExecutor {
     }
 
     public void unfreezeServer(CommandSender sender) {
-        if (!sender.hasPermission(Util.freezeServerPermission)) {
+        if (!sender.hasPermission(Util.unfreezeServerPermission)) {
             Util.sendErrorMessage(sender, LocaleHandler.getInstance().getNoPermission());
             return;
         }

@@ -2,7 +2,6 @@
 prefix: "<green><bold>[</bold><yellow>SPF</yellow><bold>]</bold></green> "
 no-permission: "<red>You do not have permission to run this command!</red>"
 no-player: "<red>You did not provide a valid player, please check your spelling and try again</red>"
-too-many-args: "<red>You have provided too many arguments, please check your syntax and try again</red>"
 world-not-found: "<red>The world <yellow><world></yellow> could not be found. Please check your spelling and try again</red>"
 freeze-message: "<green><name></green> <aqua>has been frozen</aqua>"
 freeze-server-message: "<aqua>The server has been frozen</aqua>"
@@ -20,8 +19,6 @@ login-message: "<red><bold>[NOTICE]</bold></red> <gray>You were frozen during a 
 login-notif: "<dark_gray><bold><name></bold></dark_gray> <gray>has logged in. They were frozen during a previous session."
 login-notif-server-frozen: "<dark_gray><bold><name></bold></dark_gray> <gray>has logged in. Since the server is currently frozen, they will now be frozen"
 login-notif-now-unfrozen: "<dark_gray><bold><name></bold></dark_gray> <gray>has logged in. They were frozen during a previous session. They will now be unfrozen."
-login-notif-console: "[Simple Freeze] <name> logged in while frozen"
-login-notif-console-unfreezing: "[Simple Freeze] <name> logged in while frozen- unfreezing."
 # <player> and <message> placeholders
 shadow-mute-format: "<dark_gray>[Frozen]</dark_gray> <gray><player>: <message></gray>"
 freeze-spy-enabled: "<green>Freeze Spy has been toggled <bold><yellow>On</yellow></bold>!</green>"
