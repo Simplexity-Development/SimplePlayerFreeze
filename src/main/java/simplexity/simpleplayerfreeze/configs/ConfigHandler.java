@@ -1,6 +1,7 @@
 package simplexity.simpleplayerfreeze.configs;
 
 import org.bukkit.configuration.file.FileConfiguration;
+import org.jetbrains.annotations.NotNull;
 import simplexity.simpleplayerfreeze.SimplePlayerFreeze;
 
 import java.util.ArrayList;
@@ -14,8 +15,8 @@ public class ConfigHandler {
             preventInteract, preventCrafting, preventXPPickup, preventItemPickup, preventItemDrop, preventItemUse,
             preventHotbarSwitch, preventInventoryInteraction, preventInventoryOpen, preventWalking, preventCommands, preventAttack, consoleSeesMutedMessages,
             consoleNotify, preventJumping, freezeNewLogins, freezeWorldChange, hideFromDiscSrv;
-    public static int chatBehavior;
-    public static ArrayList<String> whitelistedCommandList = new ArrayList<>();
+    private ChatBehavior chatBehavior;
+    private final ArrayList<String> whitelistedCommandList = new ArrayList<>();
 
     private ConfigHandler() {
     }
@@ -68,21 +69,33 @@ public class ConfigHandler {
         hideFromDiscSrv = config.getBoolean("hide-from-discord", true);
     }
 
-    private static void reloadConfigCommands() {
+    private void reloadConfigCommands() {
         FileConfiguration config = SimplePlayerFreeze.getInstance().getConfig();
         whitelistedCommandList.clear();
         List<String> commandList = config.getStringList("whitelisted-commands");
         whitelistedCommandList.addAll(commandList);
     }
 
-    private static void reloadConfigIntegers() {
+    private void reloadConfigIntegers() {
         FileConfiguration config = SimplePlayerFreeze.getInstance().getConfig();
-        chatBehavior = config.getInt("chat-behavior");
-        if (!(0 <= chatBehavior && chatBehavior <= 2)) {
+        int chatBehaviorInt = config.getInt("chat-behavior");
+        if (ChatBehavior.getBehaviorFromInt(chatBehaviorInt) == null) {
             SimplePlayerFreeze.getInstance().getLogger().warning(
-                    "Chat behavior value is invalid. Defaulting to 0.");
-            chatBehavior = 0;
+                    "Chat behavior value is invalid. Defaulting to NO_CHANGE.");
+            chatBehavior = ChatBehavior.NO_CHANGE;
+        } else {
+            chatBehavior = ChatBehavior.getBehaviorFromInt(chatBehaviorInt);
         }
+    }
+
+    @NotNull
+    public ChatBehavior getChatBehavior(){
+        return chatBehavior;
+    }
+
+    @NotNull
+    public ArrayList<String> getWhitelistedCommandList() {
+        return whitelistedCommandList;
     }
 
     public boolean shouldFreezePersist() {

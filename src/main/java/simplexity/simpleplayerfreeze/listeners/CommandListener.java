@@ -15,7 +15,7 @@ public class CommandListener implements Listener {
         if (!ConfigHandler.getInstance().shouldPreventCommands()) return;
         if (!Util.isFrozen(commandEvent.getPlayer())) return;
         String command = commandEvent.getMessage().split(" ")[0];
-        if (!ConfigHandler.whitelistedCommandList.contains(command)) {
+        if (!ConfigHandler.getInstance().getWhitelistedCommandList().contains(command)) {
             Util.sendErrorMessage(commandEvent.getPlayer(), LocaleHandler.getInstance().getCannotUseCommand());
             commandEvent.setCancelled(true);
         }
