@@ -13,7 +13,7 @@ public class ConfigHandler {
     private boolean freezePersist, freezeGlow, freezeDismount, freezeFlight, freezeInvulnerability, preventMovement,
             preventInteract, preventCrafting, preventXPPickup, preventItemPickup, preventItemDrop, preventItemUse,
             preventHotbarSwitch, preventInventoryInteraction, preventInventoryOpen, preventWalking, preventCommands, preventAttack, consoleSeesMutedMessages,
-            consoleNotify, preventJumping, freezeNewLogins, freezeWorldChange;
+            consoleNotify, preventJumping, freezeNewLogins, freezeWorldChange, hideFromDiscSrv;
     public static int chatBehavior;
     public static ArrayList<String> whitelistedCommandList = new ArrayList<>();
 
@@ -65,6 +65,7 @@ public class ConfigHandler {
         consoleNotify = config.getBoolean("console-notify", true);
         freezeNewLogins = config.getBoolean("freeze-new-logins", true);
         freezeWorldChange = config.getBoolean("freeze-world-change", true);
+        hideFromDiscSrv = config.getBoolean("hide-from-discord", true);
     }
 
     private static void reloadConfigCommands() {
@@ -78,8 +79,9 @@ public class ConfigHandler {
         FileConfiguration config = SimplePlayerFreeze.getInstance().getConfig();
         chatBehavior = config.getInt("chat-behavior");
         if (!(0 <= chatBehavior && chatBehavior <= 2)) {
-            SimplePlayerFreeze.getInstance().getLogger().warning("Chat behavior value is invalid. Defaulting to 0.");
-            chatBehavior = 2;
+            SimplePlayerFreeze.getInstance().getLogger().warning(
+                    "Chat behavior value is invalid. Defaulting to 0.");
+            chatBehavior = 0;
         }
     }
 
@@ -171,6 +173,7 @@ public class ConfigHandler {
         return preventInventoryOpen;
     }
 
+    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     public boolean shouldFreezeNewLogins() {
         return freezeNewLogins;
     }
@@ -179,4 +182,7 @@ public class ConfigHandler {
         return freezeWorldChange;
     }
 
+    public boolean shouldHideFromDiscSrv() {
+        return hideFromDiscSrv;
+    }
 }
