@@ -17,7 +17,7 @@ public class DiscordMessageBlocker {
     public void onGameChatMessage(GameChatMessagePreProcessEvent preMessageEvent) {
         Player player = preMessageEvent.getPlayer();
         if (ConfigHandler.getInstance().getChatBehavior() != ChatBehavior.SHADOW_MUTE) return;
-        if (!ConfigHandler.getInstance().shouldHideFromDiscSrv()) return;
+        if (!ConfigHandler.getInstance().shouldHideFromDiscordSrv()) return;
         if (!Util.isFrozen(player)) return;
         preMessageEvent.setCancelled(true);
     }

@@ -14,7 +14,7 @@ public class ConfigHandler {
     private boolean freezePersist, freezeGlow, freezeDismount, freezeFlight, freezeInvulnerability, preventMovement,
             preventInteract, preventCrafting, preventXPPickup, preventItemPickup, preventItemDrop, preventItemUse,
             preventHotbarSwitch, preventInventoryInteraction, preventInventoryOpen, preventWalking, preventCommands, preventAttack, consoleSeesMutedMessages,
-            consoleNotify, preventJumping, freezeNewLogins, freezeWorldChange, hideFromDiscSrv;
+            consoleNotify, preventJumping, freezeNewLogins, freezeWorldChange, hideFromDiscordSrv;
     private ChatBehavior chatBehavior;
     private final ArrayList<String> whitelistedCommandList = new ArrayList<>();
 
@@ -66,7 +66,7 @@ public class ConfigHandler {
         consoleNotify = config.getBoolean("console-notify", true);
         freezeNewLogins = config.getBoolean("freeze-new-logins", true);
         freezeWorldChange = config.getBoolean("freeze-world-change", true);
-        hideFromDiscSrv = config.getBoolean("hide-from-discord", true);
+        hideFromDiscordSrv = config.getBoolean("hide-from-discord", true);
     }
 
     private void reloadConfigCommands() {
@@ -195,7 +195,7 @@ public class ConfigHandler {
         return freezeWorldChange;
     }
 
-    public boolean shouldHideFromDiscSrv() {
-        return hideFromDiscSrv;
+    public boolean shouldHideFromDiscordSrv() {
+        return hideFromDiscordSrv;
     }
 }
