@@ -7,6 +7,7 @@ website: 'https://github.com/Simplexity-Development/SimplePlayerFreeze'
 depend: []
 softdepend:
   - PlaceholderAPI
+  - DiscordSRV
 permissions:
   spf.freeze:
     description: 'Allows the player to freeze other players'

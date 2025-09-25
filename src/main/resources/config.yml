@@ -15,6 +15,8 @@ freeze-invulnerability: true
 # 1 = Full mute. They cannot send messages and get an error when they attempt to
 # 2 = Shadow mute, they don't see a change in their chat, however only staff can see their messages
 chat-behavior: 2
+# Hide shadow-muted messages from DiscordSRV?
+hide-from-discord: true
 # Should console spy on attempted messages in chat behavior 2?
 console-sees-muted-messages: true
 # Should console receive the same notifications that those with the 'spf.notify' permission do?

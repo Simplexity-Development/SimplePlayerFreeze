@@ -10,6 +10,7 @@ import simplexity.simpleplayerfreeze.commands.ReloadConfig;
 import simplexity.simpleplayerfreeze.commands.UnfreezeAll;
 import simplexity.simpleplayerfreeze.commands.UnfreezePlayer;
 import simplexity.simpleplayerfreeze.configs.ConfigHandler;
+import simplexity.simpleplayerfreeze.hooks.discordsrv.DiscordSrvRegistration;
 import simplexity.simpleplayerfreeze.listeners.AttackListener;
 import simplexity.simpleplayerfreeze.listeners.ChatListener;
 import simplexity.simpleplayerfreeze.listeners.CommandListener;
@@ -26,7 +27,7 @@ import simplexity.simpleplayerfreeze.listeners.MoveListener;
 import simplexity.simpleplayerfreeze.listeners.PickupListener;
 import simplexity.simpleplayerfreeze.listeners.SwitchItemListener;
 import simplexity.simpleplayerfreeze.listeners.WorldEnterListener;
-import simplexity.simpleplayerfreeze.placeholderapi.IsFrozenPlaceholder;
+import simplexity.simpleplayerfreeze.hooks.placeholderapi.IsFrozenPlaceholder;
 
 public final class SimplePlayerFreeze extends JavaPlugin {
     public static SimplePlayerFreeze instance;
@@ -39,7 +40,7 @@ public final class SimplePlayerFreeze extends JavaPlugin {
         server = getServer();
         sfConsoleSender = server.getConsoleSender();
         boolean papiEnabled = getServer().getPluginManager().isPluginEnabled("PlaceholderAPI");
-        System.out.println(papiEnabled);
+        boolean discordSrvEnabled = getServer().getPluginManager().isPluginEnabled("DiscordSRV");
         this.getCommand("freeze").setExecutor(new FreezePlayer());
         this.getCommand("unfreeze").setExecutor(new UnfreezePlayer());
         this.getCommand("freezereload").setExecutor(new ReloadConfig());
@@ -48,6 +49,9 @@ public final class SimplePlayerFreeze extends JavaPlugin {
         this.getCommand("unfreezeall").setExecutor(new UnfreezeAll());
         if (papiEnabled) {
             new IsFrozenPlaceholder().register();
+        }
+        if (discordSrvEnabled) {
+            DiscordSrvRegistration.registerListener(this);
         }
         registerListeners();
         this.saveDefaultConfig();

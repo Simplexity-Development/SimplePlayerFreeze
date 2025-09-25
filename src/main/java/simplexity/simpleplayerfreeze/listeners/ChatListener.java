@@ -7,6 +7,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import simplexity.simpleplayerfreeze.SimplePlayerFreeze;
 import simplexity.simpleplayerfreeze.Util;
+import simplexity.simpleplayerfreeze.configs.ChatBehavior;
 import simplexity.simpleplayerfreeze.configs.ConfigHandler;
 import simplexity.simpleplayerfreeze.configs.LocaleHandler;
 
@@ -15,15 +16,15 @@ public class ChatListener implements Listener {
     @EventHandler
     public void onChat(AsyncChatEvent chatEvent) {
         String shadowMuteFormat = LocaleHandler.getInstance().getShadowMuteFormat();
-        if (!(ConfigHandler.chatBehavior == 1 || ConfigHandler.chatBehavior == 2)) return;
-        switch (ConfigHandler.chatBehavior) {
-            case 1:
+        if (ConfigHandler.getInstance().getChatBehavior() == ChatBehavior.NO_CHANGE) return;
+        switch (ConfigHandler.getInstance().getChatBehavior()) {
+            case ChatBehavior.FULL_MUTE:
                 if (Util.isFrozen(chatEvent.getPlayer())) {
                     chatEvent.setCancelled(true);
                     Util.sendErrorMessage(chatEvent.getPlayer(), LocaleHandler.getInstance().getCannotChat());
                 }
                 break;
-            case 2:
+            case ChatBehavior.SHADOW_MUTE:
                 if (!Util.isFrozen(chatEvent.getPlayer())) return;
                 Component message = chatEvent.message();
                 chatEvent.viewers().clear();
